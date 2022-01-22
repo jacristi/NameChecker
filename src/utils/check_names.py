@@ -30,6 +30,8 @@ def check_names_for_avoids(names_list, ignore_list, avoids_df, checked_avoids):
     cat_cols.remove('name')
 
     results_df = results_df.replace('', np.NaN).dropna(subset=cat_cols, how='all')
+    results_df = results_df.dropna(axis=1, how='all')
+    results_df = results_df.replace(np.NaN, '')
 
     return results_df
 
@@ -55,6 +57,23 @@ def check_anywhere(name, avoid):
 
     return avoid.lower() in name.lower()
 
+
+def string_compare_prefix(name, avoid):
+    """ """
+
+    return name.lower()[0:3] == avoid.lower()[0:3]
+
+def string_compare_4_letter(name, avoid):
+    """ """
+
+    return any(name.lower()[i:i+4] in avoid.lower() for i in range(len(name)-4))
+
+def string_compare_combo(name, avoid):
+    """ """
+
+    return (name.lower()[0] == avoid.lower()[0]) and (name.lower()[-3:] == avoid.lower()[-3:])
+
+
 def check_string_compare(name, avoid, n):
     """ """
 
@@ -62,26 +81,22 @@ def check_string_compare(name, avoid, n):
 
 
 TYPE_CHECK_FUNCS = {
-    c.PREFIX:           check_prefix,
-    c.INFIX:            check_infix,
-    c.SUFFIX:           check_suffix,
-    c.ANYWHERE:         check_anywhere,
-    c.STRING_COMPARE:   check_string_compare,
+    c.PREFIX:           [check_prefix],
+    c.INFIX:            [check_infix],
+    c.SUFFIX:           [check_suffix],
+    c.ANYWHERE:         [check_anywhere],
+    c.STRING_COMPARE:   [string_compare_prefix, string_compare_4_letter, string_compare_combo],
 }
 
 def check_name_against_avoids(name, avoids_df, ignore_list, results_df):
     """ """
 
     for t in set(avoids_df['type']):
-        if t == c.STRING_COMPARE:
-            pass
-        else:
-            ### Filter df on
-            t_df = avoids_df[avoids_df['type'] == t]
 
-            ### Get the type function to check (e.g. check_prefix for type == 'prefix')
-            check_func = TYPE_CHECK_FUNCS[t]
+        t_df = avoids_df[avoids_df['type'] == t]
 
+        ### Get the type function(s) to check (e.g. check_prefix for type == 'prefix')
+        for check_func in TYPE_CHECK_FUNCS[t]:
             for ind, row in t_df[['value', 'category']].drop_duplicates().iterrows():
                 if check_func(name, row['value']):
                     ### Get category and value (type)
@@ -100,40 +115,3 @@ def check_name_against_avoids(name, avoids_df, ignore_list, results_df):
                     )
 
     return results_df
-
-
-
-
-
-
-### Try to be category agnostic, only use value, type - category used ONLY to show which category hit was in
-
-# def check_market_research_avoids():
-#     """ """
-#     pass
-
-# def check_inn_avoids():
-#     """ """
-#     pass
-
-# def check_competitor_avoids():
-#     """ """
-#     pass
-
-# def check_linguistic_avoids():
-#     """ """
-#     pass
-
-# def check_project_avoids():
-#     """ """
-#     pass
-
-
-# def check_for_avoids(names, ignores, avoids_df, category):
-#     AVOIDS_CHECK_FUNCS = {
-#     c.MARKET_RESEARCH:  check_market_research_avoids,
-#     c.INN:              check_inn_avoids,
-#     c.PROJECT:          check_project_avoids,
-#     c.LINGUISTIC:       check_linguistic_avoids,
-#     c.COMPETITOR:       check_competitor_avoids,
-# }

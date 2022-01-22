@@ -2,6 +2,7 @@ from configparser import ConfigParser
 
 import pandas as pd
 
+import src.utils.constants as c
 from src.utils.common_utils import error_handler, get_config
 
 
@@ -13,7 +14,7 @@ def get_avoids_from_file(logger, config):
 
     consol_df = None
 
-    for s_name in ('INN - USAN', 'Pharma', 'Linguistic', 'Competitor'):
+    for s_name in (c.INN, c.LINGUISTIC, c.MARKET_RESEARCH):
         df = pd.read_excel(file_path, sheet_name=s_name)
         df['category'] = s_name
 
@@ -22,10 +23,9 @@ def get_avoids_from_file(logger, config):
         else:
             consol_df = pd.concat([consol_df, df])
 
+    consol_df = consol_df[~consol_df['type'].isnull()]
+
     return consol_df
-
-
-
 
 
 

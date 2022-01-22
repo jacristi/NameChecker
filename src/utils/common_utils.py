@@ -11,16 +11,23 @@ def get_config():
     CONF.read(config_path)
     return CONF['DEFAULT']
 
+
 def error_handler(func):
     """ """
     @wraps(func)
     def wrapper(*args, **kwargs):
         """ """
-        logger = kwargs.get('logger')
-        with Timer(logger, func.__name__):
-            try:
-                ret = func(*args, **kwargs)
-            except Exception as e:
+        ret = None
+        obj = args[0] if args else None
+
+        try:
+            print(func.__name__)
+            ret = func(*args, **kwargs)
+        except Exception as e:
+            print(e)
+            if obj is not None:
+                obj.raiseError(e)
+            else:
                 raise e
 
         return ret
@@ -45,6 +52,7 @@ class Logger(logging.Logger):
         self.log_file_path = config.get('LOG_FILE_PATH', self.log_file_path)
         self._set_console_handler()
         self._set_file_handler()
+        self.setLevel(self.log_level)
 
     def _set_console_handler(self):
         """ """

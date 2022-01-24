@@ -1,16 +1,8 @@
 import logging
 from functools import wraps
 from datetime import datetime
-from configparser import ConfigParser
 
 from src.utils.data_models import UserError
-
-def get_config():
-    """ """
-    config_path = 'config.ini'
-    CONF = ConfigParser()
-    CONF.read(config_path)
-    return CONF['DEFAULT']
 
 
 def error_handler(func):
@@ -30,6 +22,7 @@ def error_handler(func):
             else:
                 raise e
         except Exception as e:
+            print(e)
             if obj is not None:
                 obj.raise_critical_error(e)
             else:
@@ -39,16 +32,12 @@ def error_handler(func):
     return wrapper
 
 
-def read_config():
-    """ """
-    pass
-
-
 class Logger(logging.Logger):
     """ """
 
     custom_formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
     log_file_path = 'output.log'
+
     def setup(self, config, log_level=logging.INFO):
         """ """
         self.config = config

@@ -1,3 +1,7 @@
+from src.env import get_config
+
+CONFIG = get_config()
+
 INN = 'INN - USAN'
 INN_SHORTHAND = 'inn'
 
@@ -26,3 +30,6 @@ INFIX = 'infix'
 SUFFIX = 'suffix'
 ANYWHERE = 'anywhere'
 STRING_COMPARE = 'string_compare'
+
+FIX_SIGNIFIERS = CONFIG.get('FIX_SIGNIFIERS', '-,~').split(',')
+ANYWHERE_SIGNIFIERS = CONFIG.get('ANYWHERE_SIGNIFIERS', '",*').split(',')

@@ -1,4 +1,3 @@
-from inspect import trace
 import sys
 import traceback
 
@@ -10,8 +9,8 @@ import src.utils.constants as c
 from src.UI import ui_namechecker
 from src.utils.data_models import QTPandasModel, UserError
 from src.utils.check_names import check_names_for_avoids
-from src.utils.common_utils import get_config, Logger, error_handler
-from src.utils.get_avoids_data import get_avoids_from_file, parse_project_competitor_avoids
+from src.utils.common_utils import Logger, error_handler
+from src.utils.get_avoids_data import get_avoids_from_file, parse_project_competitor_avoids, save_project_competitor_to_file, read_project_competitor_from_file
 
 
 class UIMain(QMainWindow):
@@ -28,7 +27,7 @@ class UIMain(QMainWindow):
         self.ui.setupUi(self)
         self.setWindowIcon(QtGui.QIcon('app.ico'))
 
-        self.config = get_config()
+        self.config = c.get_config()
         self.logger = Logger('App Logger')
         self.logger.setup(self.config)
 
@@ -47,6 +46,7 @@ class UIMain(QMainWindow):
 
         self.set_avoids_table_data()
 
+        self.set_project_competitor_avoids_from_file()
 
     @error_handler
     def set_avoids_table_data(self, upd_df=None):
@@ -54,7 +54,9 @@ class UIMain(QMainWindow):
             self.avoids_df = get_avoids_from_file(self.logger, self.config)
         else:
             self.avoids_df = pd.concat([self.avoids_df, upd_df])
-        # self.qtable_results.setModel(QTPandasModel(df))
+
+        self.avoids_df.drop_duplicates(subset=['value', 'type', 'category'], inplace=True)
+
         self.ui.qtable_avoids.setModel(QTPandasModel(self.avoids_df))
 
         header = self.ui.qtable_avoids.horizontalHeader()
@@ -174,13 +176,22 @@ class UIMain(QMainWindow):
         """ """
         project_avoids_text = self.ui.text_project_avoids.toPlainText()
         competitor_avoids_text = self.ui.text_competitor.toPlainText()
+
         if project_avoids_text == '' and competitor_avoids_text == '':
             raise UserError("No avoids to save!")
 
+        save_project_competitor_to_file(self.config, project_avoids_text, competitor_avoids_text)
+
         addtl_avoids_df = parse_project_competitor_avoids(project_avoids_text, competitor_avoids_text)
-        # pd.DataFrame.from_dict({'value':['aaa', 'zzz'], 'type':['anywhere', 'prefix'], 'description':['', ''], 'category':['project', 'project']})
+
         self.set_avoids_table_data(addtl_avoids_df)
 
+    @error_handler
+    def set_project_competitor_avoids_from_file(self):
+        """ """
+        proj_text, comp_text = read_project_competitor_from_file(self.config)
+        self.ui.text_project_avoids.setPlainText(proj_text)
+        self.ui.text_competitor.setPlainText(comp_text)
 
     def raise_error(self, err):
         """ """

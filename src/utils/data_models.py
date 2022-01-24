@@ -10,6 +10,7 @@ class QTPandasModel(QAbstractTableModel):
         """ """
         QAbstractTableModel.__init__(self, parent)
         self._data = data
+        self._columns = data.columns
 
     def rowCount(self, parent=None):
         """ """
@@ -44,5 +45,13 @@ class QTPandasModel(QAbstractTableModel):
             return True
 
     def insertRow(self, row, parent):
-        print('inserting row')
         return super().insertRow(row, parent=parent)
+
+    def sort(self, Ncol, order):
+        """ """
+        self.layoutAboutToBeChanged.emit()
+        self._data = self._data.sort_values(
+            self._columns[Ncol],
+            ascending=order==Qt.AscendingOrder
+            )
+        self.layoutChanged.emit()

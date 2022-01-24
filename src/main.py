@@ -1,8 +1,7 @@
 import sys
 
 import pandas as pd
-from PyQt5 import QtCore, QtWidgets
-from PyQt5.QtCore import Qt, QVariant, QAbstractTableModel
+from PyQt5 import QtCore, QtWidgets, QtGui
 from PyQt5.QtWidgets import QApplication, QMainWindow, QMessageBox, QErrorMessage
 
 import src.utils.constants as c
@@ -25,6 +24,7 @@ class UIMain(QMainWindow):
         super(UIMain, self).__init__()
         self.ui = ui_namechecker.Ui_NameChecker()
         self.ui.setupUi(self)
+        self.setWindowIcon(QtGui.QIcon('app.ico'))
 
         self.config = get_config()
         self.logger = Logger('App Logger')
@@ -54,6 +54,8 @@ class UIMain(QMainWindow):
 
         header = self.ui.qtable_avoids.horizontalHeader()
         header.setSectionResizeMode(2, QtWidgets.QHeaderView.Stretch)
+
+        self.ui.qtable_avoids.setSortingEnabled(True)
 
     @error_handler
     def set_results_table_data(self):
@@ -85,8 +87,8 @@ class UIMain(QMainWindow):
         self.read_stem_ignores()
         self.read_checkboxes()
 
-        if not self.names_list:
-            return
+        if self.names_list == ['']:
+            raise ValueError("No names entered!")
 
         self.results_df = check_names_for_avoids(
             self.names_list,
@@ -190,7 +192,6 @@ def run():
     NameChecker = UIMain()
     NameChecker.show()
 
-    # sip.destroyonexit(False)
     sys.exit(app.exec_())
 
 if __name__ == '__main__':
@@ -199,18 +200,20 @@ if __name__ == '__main__':
 
 ### XXX stub all top level functions
 ### XXX bind all buttons to dummy functions
-
-### TODO get checked avoid types checkboxes
-### TODO read in names, strip and save in mem
-### TODO re-output names according to case button click (upper, title, lower)
-### TODO save project avoids to in mem avoids df and show in avoids table
-### TODO save project avoids to file rto persist across sessions
-### TODO check names against each string according to position type
-            # prefix `startswith`
-            # infix `in` [1:-1]
-            # suffix `endswith`
-            # anywhere `in`
-            # string comparison - consult original logic
-### TODO show hits in results table
+### XXX get checked avoid types checkboxes
+### XXX read in names, strip and save in mem
+### XXX re-output names according to case button click (upper, title, lower)
+### XXX save project avoids to in mem avoids df and show in avoids table
+### TODO save project/competitor avoids to file to persist across sessions
+### TODO check names against each string according to position type (save as csv or txt?)
+            # XXX prefix `startswith`
+            # XXX infix `in` [1:-1]
+            # XXX suffix `endswith`
+            # XXX anywhere `in`
+            # TODO string comparison - consult original logic
+### XXX show hits in results table
+### Show results with avoid string highlighted in name?
 ### TODO avoids table sortable, searchable?
 ### TODO incorporate LBB log and style guide
+### TODO update all item tooltips
+### TODO keyboard short-cuts

@@ -98,19 +98,24 @@ def check_name_against_avoids(name, avoids_df, ignore_list, results_df):
         ### Get the type function(s) to check (e.g. check_prefix for type == 'prefix')
         for check_func in TYPE_CHECK_FUNCS[t]:
             for ind, row in t_df[['value', 'category']].drop_duplicates().iterrows():
+                val = row['value']
+
+                if any([val in ignore for ignore in ignore_list]):
+                    continue
+
                 if check_func(name, row['value']):
                     ### Get category and value (type)
                     cat = row['category']
-                    row_val = row['value']
-                    val = f'{row_val} ({t})'
+
+                    val_str = f'{val} ({t})'
 
                     ### Add new or append value to appropriate name + category cell
                     results_df[row['category']] = np.where(
                         results_df['name'] == name,
                         np.where(
                             results_df[cat] == '',
-                            val,
-                            results_df[cat] + '\n' + val),
+                            val_str,
+                            results_df[cat] + '\n' + val_str),
                         results_df[cat]
                     )
 

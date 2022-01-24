@@ -26,5 +26,3 @@ INFIX = 'infix'
 SUFFIX = 'suffix'
 ANYWHERE = 'anywhere'
 STRING_COMPARE = 'string_compare'
-
-MIN_STRING_COMPARE = 4 ### TODO Define in config

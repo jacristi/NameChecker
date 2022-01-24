@@ -3,6 +3,7 @@ from functools import wraps
 from datetime import datetime
 from configparser import ConfigParser
 
+from src.utils.data_models import UserError
 
 def get_config():
     """ """
@@ -23,13 +24,16 @@ def error_handler(func):
         try:
             print(func.__name__)
             ret = func(*args, **kwargs)
-        except Exception as e:
-            print(e)
+        except UserError as e:
             if obj is not None:
-                obj.raiseError(e)
+                obj.raise_error(e)
             else:
                 raise e
-
+        except Exception as e:
+            if obj is not None:
+                obj.raise_critical_error(e)
+            else:
+                raise e
         return ret
 
     return wrapper

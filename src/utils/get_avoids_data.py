@@ -29,10 +29,7 @@ def get_avoids_from_file(logger, config):
 
 
 
-if __name__ == '__main__':
-    from utils.common_utils import Logger
+def parse_project_competitor_avoids(project_avoids_text, competitor_avoids_text):
+    """ """
 
-    config = get_config()
-    logger = Logger().setup(config)
-
-    get_avoids_from_file(logger, config)
+    return True

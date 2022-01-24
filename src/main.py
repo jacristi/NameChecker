@@ -1,4 +1,6 @@
+from inspect import trace
 import sys
+import traceback
 
 import pandas as pd
 from PyQt5 import QtCore, QtWidgets, QtGui
@@ -6,10 +8,10 @@ from PyQt5.QtWidgets import QApplication, QMainWindow, QMessageBox, QErrorMessag
 
 import src.utils.constants as c
 from src.UI import ui_namechecker
-from src.utils.data_models import QTPandasModel
+from src.utils.data_models import QTPandasModel, UserError
 from src.utils.check_names import check_names_for_avoids
 from src.utils.common_utils import get_config, Logger, error_handler
-from src.utils.get_avoids_data import get_avoids_from_file
+from src.utils.get_avoids_data import get_avoids_from_file, parse_project_competitor_avoids
 
 
 class UIMain(QMainWindow):
@@ -22,7 +24,7 @@ class UIMain(QMainWindow):
 
     def __init__(self):
         super(UIMain, self).__init__()
-        self.ui = ui_namechecker.Ui_NameChecker()
+        self.ui = ui_namechecker.Ui_NameEvaluator()
         self.ui.setupUi(self)
         self.setWindowIcon(QtGui.QIcon('app.ico'))
 
@@ -37,7 +39,7 @@ class UIMain(QMainWindow):
         self.ui.btn_upper_case.clicked.connect(self.set_names_uppercase)
         self.ui.btn_title_case.clicked.connect(self.set_names_titlecase)
         self.ui.btn_lower_case.clicked.connect(self.set_names_lowercase)
-        self.ui.btn_save_avoids.clicked.connect(self.save_project_avoids)
+        self.ui.btn_save_avoids.clicked.connect(self.save_project_competitor_avoids)
         self.ui.btn_reload_avoids.clicked.connect(self.reload_avoids)
         self.ui.btn_exit.clicked.connect(self.close_app)
 
@@ -47,8 +49,11 @@ class UIMain(QMainWindow):
 
 
     @error_handler
-    def set_avoids_table_data(self):
-        self.avoids_df = get_avoids_from_file(self.logger, self.config)
+    def set_avoids_table_data(self, upd_df=None):
+        if upd_df is None:
+            self.avoids_df = get_avoids_from_file(self.logger, self.config)
+        else:
+            self.avoids_df = pd.concat([self.avoids_df, upd_df])
         # self.qtable_results.setModel(QTPandasModel(df))
         self.ui.qtable_avoids.setModel(QTPandasModel(self.avoids_df))
 
@@ -88,7 +93,7 @@ class UIMain(QMainWindow):
         self.read_checkboxes()
 
         if self.names_list == ['']:
-            raise ValueError("No names entered!")
+            raise UserError("No names entered!")
 
         self.results_df = check_names_for_avoids(
             self.names_list,
@@ -140,7 +145,6 @@ class UIMain(QMainWindow):
     @error_handler
     def set_names_uppercase(self, val):
         """ """
-        print("set_names_uppercase")
         self.get_and_strip_names()
         self.names_list = [i.upper() for i in self.names_list]
 
@@ -160,21 +164,32 @@ class UIMain(QMainWindow):
 
 
     @error_handler
-    def reload_avoids(self):
+    def reload_avoids(self, val):
         """ """
         self.set_avoids_table_data()
 
 
     @error_handler
-    def save_project_avoids(self):
+    def save_project_competitor_avoids(self, val):
         """ """
-        print("save_project_avoids")
+        project_avoids_text = self.ui.text_project_avoids.toPlainText()
+        competitor_avoids_text = self.ui.text_competitor.toPlainText()
+        if project_avoids_text == '' and competitor_avoids_text == '':
+            raise UserError("No avoids to save!")
+
+        addtl_avoids_df = parse_project_competitor_avoids(project_avoids_text, competitor_avoids_text)
+        # pd.DataFrame.from_dict({'value':['aaa', 'zzz'], 'type':['anywhere', 'prefix'], 'description':['', ''], 'category':['project', 'project']})
+        self.set_avoids_table_data(addtl_avoids_df)
 
 
-    def raiseError(self, err):
+    def raise_error(self, err):
         """ """
         self.err_dialogue.showMessage(str(err))
 
+
+    def raise_critical_error(self, err):
+        """ """
+        QMessageBox.critical(self, 'An unexpected error occurred', traceback.format_exc())
 
     def close_app(self):
         choice = QMessageBox.question(self, "Quit", "Leave?", QMessageBox.Yes | QMessageBox.No)
@@ -213,7 +228,8 @@ if __name__ == '__main__':
             # TODO string comparison - consult original logic
 ### XXX show hits in results table
 ### Show results with avoid string highlighted in name?
-### TODO avoids table sortable, searchable?
+### XXX avoids table sortable
+### XXX avoids table searchable
 ### TODO incorporate LBB log and style guide
 ### TODO update all item tooltips
 ### TODO keyboard short-cuts

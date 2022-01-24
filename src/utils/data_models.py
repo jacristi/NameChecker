@@ -55,3 +55,8 @@ class QTPandasModel(QAbstractTableModel):
             ascending=order==Qt.AscendingOrder
             )
         self.layoutChanged.emit()
+
+
+
+class UserError(Exception):
+    """ """

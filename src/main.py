@@ -48,6 +48,13 @@ class UIMain(QMainWindow):
 
         self.set_project_competitor_avoids_from_file()
 
+        self.clickable(self.ui.group_check_uncheck_all).connect(self.click_group_check_uncheck_all)
+        self.clickable(self.ui.group_inn).connect(self.click_group_inn)
+        self.clickable(self.ui.group_market_research).connect(self.click_group_market_research)
+        self.clickable(self.ui.group_linguistics).connect(self.click_group_linguistics)
+        self.clickable(self.ui.group_competitor).connect(self.click_group_competitor)
+        self.clickable(self.ui.group_project_avoids).connect(self.click_group_project_avoids)
+
     @error_handler
     def set_avoids_table_data(self, upd_df=None):
         if upd_df is None:
@@ -72,24 +79,27 @@ class UIMain(QMainWindow):
         if self.results_df.empty:
             self.results_df = pd.DataFrame.from_dict({'Results': ['No Conflicts!']})
 
+        self.ui.qtable_results.reset()
         self.ui.qtable_results.setModel(QTPandasModel(self.results_df))
 
         rows = self.ui.qtable_results.verticalHeader()
-        rows.setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
+        rows.setSectionResizeMode(QtWidgets.QHeaderView.ResizeToContents)
 
         header = self.ui.qtable_results.horizontalHeader()
         header.setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
+
 
     @error_handler
     def get_and_strip_names(self):
         """ """
         names_list_text = self.ui.text_names.toPlainText()
-        self.names_list = names_list_text.split('\n')
+        self.names_list = [i.strip() for i in names_list_text.split('\n') if i.strip()]
 
 
     @error_handler
     def check_names(self, val):
         """ """
+        self.setCursor(QtGui.QCursor(QtCore.Qt.BusyCursor))
         self.get_and_strip_names()
         self.read_stem_ignores()
         self.read_checkboxes()
@@ -104,6 +114,7 @@ class UIMain(QMainWindow):
             self.checked_categories,
             )
         self.set_results_table_data()
+        self.setCursor(QtGui.QCursor(QtCore.Qt.ArrowCursor))
 
 
     @error_handler
@@ -202,6 +213,46 @@ class UIMain(QMainWindow):
         """ """
         QMessageBox.critical(self, 'An unexpected error occurred', traceback.format_exc())
 
+    def clickable(self, widget):
+
+        class Filter(QtCore.QObject):
+
+            clicked = QtCore.pyqtSignal()
+
+            def eventFilter(self, obj, event):
+
+                if obj == widget:
+                    if event.type() == QtCore.QEvent.MouseButtonRelease:
+                        if obj.rect().contains(event.pos()):
+                            self.clicked.emit()
+                            return True
+
+                return False
+
+        filter = Filter(widget)
+        widget.installEventFilter(filter)
+        return filter.clicked
+
+    def click_group_check_uncheck_all(self):
+        val = not self.ui.checkbox_all.isChecked()
+        self.check_uncheck_all(val)
+        self.ui.checkbox_all.setChecked(val)
+
+    def click_group_inn(self):
+        self.ui.checkbox_inn.setChecked(not self.ui.checkbox_inn.isChecked())
+
+    def click_group_market_research(self):
+        self.ui.checkbox_market_research.setChecked(not self.ui.checkbox_market_research.isChecked())
+
+    def click_group_linguistics(self):
+        self.ui.checkbox_linguistic.setChecked(not self.ui.checkbox_linguistic.isChecked())
+
+    def click_group_competitor(self):
+        self.ui.checkbox_competitor.setChecked(not self.ui.checkbox_competitor.isChecked())
+
+    def click_group_project_avoids(self):
+        self.ui.checkbox_project.setChecked(not self.ui.checkbox_project.isChecked())
+
     def close_app(self):
         choice = QMessageBox.question(self, "Quit", "Leave?", QMessageBox.Yes | QMessageBox.No)
 
@@ -230,7 +281,7 @@ if __name__ == '__main__':
 ### XXX read in names, strip and save in mem
 ### XXX re-output names according to case button click (upper, title, lower)
 ### XXX save project avoids to in mem avoids df and show in avoids table
-### TODO save project/competitor avoids to file to persist across sessions
+### XXX save project/competitor avoids to file to persist across sessions
 ### TODO check names against each string according to position type (save as csv or txt?)
             # XXX prefix `startswith`
             # XXX infix `in` [1:-1]
@@ -241,6 +292,8 @@ if __name__ == '__main__':
 ### Show results with avoid string highlighted in name?
 ### XXX avoids table sortable
 ### XXX avoids table searchable
-### TODO incorporate LBB log and style guide
+
+### TODO incorporate LBB logo and style guide
 ### TODO update all item tooltips
 ### TODO keyboard short-cuts
+### TODO improved avodis table sort functionality ("waterfall sort")

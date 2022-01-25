@@ -148,6 +148,6 @@ cython_debug/
 [Dd]ata/
 
 # UI and Style related Files
-*.ui
 *.ico
 *.txt
+*.jpg

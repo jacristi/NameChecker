@@ -14,7 +14,7 @@ def error_handler(func):
         obj = args[0] if args else None
 
         try:
-            print(func.__name__)
+            print(f'Calling {func.__name__}')
             ret = func(*args, **kwargs)
         except UserError as e:
             if obj is not None:

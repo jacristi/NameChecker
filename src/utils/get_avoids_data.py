@@ -31,8 +31,8 @@ def get_avoids_from_file(logger, config):
 
 def parse_project_competitor_avoids(project_avoids_text, competitor_avoids_text):
     """ """
-    project_avoids = [i.strip() for i in project_avoids_text.split('\n') if i]
-    competitor_avoids = [i.strip() for i in competitor_avoids_text.split('\n') if i]
+    project_avoids = [i.strip() for i in project_avoids_text.split('\n') if i.strip()]
+    competitor_avoids = [i.strip() for i in competitor_avoids_text.split('\n') if i.strip()]
     avoids_df = pd.DataFrame.from_dict({
         'value':        [],
         'type':         [],

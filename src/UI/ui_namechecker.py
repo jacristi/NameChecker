@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file '.\src\UI\UINameChecker.ui'
+# Form implementation generated from reading ui file '.\src\UI\UINameEvalStyled.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.4
 #
@@ -102,19 +102,92 @@ class Ui_NameEvaluator(object):
 "max-height: 4px;\n"
 "}")
         self.MainWindow = QtWidgets.QWidget(NameEvaluator)
-        self.MainWindow.setStyleSheet("opacity: 0;")
+        self.MainWindow.setStyleSheet("opacity: 0;\n"
+"font: 10pt \"Cambria\";\n"
+"background-color: #55565A;\n"
+"")
         self.MainWindow.setObjectName("MainWindow")
         self.gridLayout_2 = QtWidgets.QGridLayout(self.MainWindow)
         self.gridLayout_2.setObjectName("gridLayout_2")
         self.MainTab = QtWidgets.QTabWidget(self.MainWindow)
         font = QtGui.QFont()
-        font.setBold(True)
+        font.setFamily("Cambria")
+        font.setPointSize(10)
+        font.setBold(False)
+        font.setItalic(False)
         font.setUnderline(False)
-        font.setWeight(75)
+        font.setWeight(50)
         font.setKerning(False)
         self.MainTab.setFont(font)
         self.MainTab.setMouseTracking(False)
-        self.MainTab.setStyleSheet("")
+        self.MainTab.setStyleSheet("\n"
+"QWidget{\n"
+"background-color:#006B3F;\n"
+"}\n"
+"QLabel{\n"
+"font: 75 14pt \"Cambria\";\n"
+"font-weight:bold;\n"
+"color:white;\n"
+"}\n"
+"QPlainTextEdit {\n"
+"background-color:white;\n"
+"}\n"
+"QTableView {\n"
+"background-color:white;\n"
+"border:None\n"
+"}\n"
+"QLineEdit{\n"
+"background-color: white;\n"
+"}\n"
+"QToolButton{\n"
+"background-color: #4F748B;\n"
+"}\n"
+"QToolButton:hover{\n"
+"background-color: #9BB7D3;\n"
+"color:white;\n"
+"}\n"
+"QPushButton{\n"
+"background-color: #26D07C;\n"
+"border: 2px solid #55565A;\n"
+"border-radius: 6px;\n"
+"}\n"
+"QPushButton:hover{\n"
+"background-color:#D0B888;\n"
+"border: 1px solid white;\n"
+"color:white;\n"
+"}\n"
+"QGroupBox{\n"
+"background-color: #26D07C;\n"
+"border: 2px solid  #55565A;\n"
+"border-radius:6px;\n"
+"}\n"
+"QGroupBox:hover{\n"
+"background-color: #A9A8A9;\n"
+"}\n"
+"QCheckBox{\n"
+"border: None;\n"
+"background-color: None;\n"
+"}\n"
+"QCheckBox:hover{\n"
+"color:white;\n"
+"}\n"
+"\n"
+"QTabWidget QTabBar::tab{\n"
+"background-color: #A9A8A9;\n"
+"height: 25px;\n"
+"width: 256px;\n"
+"color:white;\n"
+"font-weight:bold;\n"
+"}\n"
+"QTabWidget QTabBar::tab:selected{\n"
+"background-color: #006B3F;\n"
+"width: 256px;\n"
+"color:white;\n"
+"}\n"
+"QCheckbox{\n"
+"border: None;\n"
+"background-color: None;\n"
+"}")
         self.MainTab.setTabPosition(QtWidgets.QTabWidget.North)
         self.MainTab.setObjectName("MainTab")
         self.main_tab = QtWidgets.QWidget()
@@ -127,8 +200,17 @@ class Ui_NameEvaluator(object):
         self.verticalLayout_2 = QtWidgets.QVBoxLayout()
         self.verticalLayout_2.setContentsMargins(-1, 0, -1, -1)
         self.verticalLayout_2.setObjectName("verticalLayout_2")
+        self.label_2 = QtWidgets.QLabel(self.main_tab)
+        self.label_2.setObjectName("label_2")
+        self.verticalLayout_2.addWidget(self.label_2)
+        self.label = QtWidgets.QLabel(self.main_tab)
+        self.label.setMaximumSize(QtCore.QSize(150, 150))
+        self.label.setObjectName("label")
+        self.verticalLayout_2.addWidget(self.label, 0, QtCore.Qt.AlignHCenter|QtCore.Qt.AlignVCenter)
         spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Minimum)
         self.verticalLayout_2.addItem(spacerItem)
+        spacerItem1 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Minimum)
+        self.verticalLayout_2.addItem(spacerItem1)
         self.name_rationale_label_3 = QtWidgets.QLabel(self.main_tab)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
@@ -137,23 +219,35 @@ class Ui_NameEvaluator(object):
         self.name_rationale_label_3.setSizePolicy(sizePolicy)
         self.name_rationale_label_3.setMinimumSize(QtCore.QSize(0, 0))
         font = QtGui.QFont()
+        font.setFamily("Cambria")
+        font.setPointSize(14)
         font.setBold(True)
         font.setItalic(False)
         font.setWeight(75)
         self.name_rationale_label_3.setFont(font)
+        self.name_rationale_label_3.setStyleSheet("")
         self.name_rationale_label_3.setAlignment(QtCore.Qt.AlignCenter)
         self.name_rationale_label_3.setObjectName("name_rationale_label_3")
         self.verticalLayout_2.addWidget(self.name_rationale_label_3, 0, QtCore.Qt.AlignTop)
-        self.horizontalLayout_13 = QtWidgets.QHBoxLayout()
+        self.group_check_uncheck_all = QtWidgets.QGroupBox(self.main_tab)
+        self.group_check_uncheck_all.setMouseTracking(False)
+        self.group_check_uncheck_all.setStyleSheet("")
+        self.group_check_uncheck_all.setCheckable(False)
+        self.group_check_uncheck_all.setObjectName("group_check_uncheck_all")
+        self.horizontalLayout_13 = QtWidgets.QHBoxLayout(self.group_check_uncheck_all)
         self.horizontalLayout_13.setObjectName("horizontalLayout_13")
-        self.checkbox_all = QtWidgets.QCheckBox(self.main_tab)
+        self.checkbox_all = QtWidgets.QCheckBox(self.group_check_uncheck_all)
         self.checkbox_all.setToolTip("")
+        self.checkbox_all.setStyleSheet("")
         self.checkbox_all.setObjectName("checkbox_all")
         self.horizontalLayout_13.addWidget(self.checkbox_all)
-        self.verticalLayout_2.addLayout(self.horizontalLayout_13)
-        self.horizontalLayout_4 = QtWidgets.QHBoxLayout()
+        self.verticalLayout_2.addWidget(self.group_check_uncheck_all)
+        self.group_inn = QtWidgets.QGroupBox(self.main_tab)
+        self.group_inn.setStyleSheet("")
+        self.group_inn.setObjectName("group_inn")
+        self.horizontalLayout_4 = QtWidgets.QHBoxLayout(self.group_inn)
         self.horizontalLayout_4.setObjectName("horizontalLayout_4")
-        self.checkbox_inn = QtWidgets.QCheckBox(self.main_tab)
+        self.checkbox_inn = QtWidgets.QCheckBox(self.group_inn)
         self.checkbox_inn.setEnabled(True)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
@@ -162,16 +256,20 @@ class Ui_NameEvaluator(object):
         self.checkbox_inn.setSizePolicy(sizePolicy)
         self.checkbox_inn.setMaximumSize(QtCore.QSize(16777215, 16777215))
         self.checkbox_inn.setToolTip("")
+        self.checkbox_inn.setStyleSheet("")
         self.checkbox_inn.setObjectName("checkbox_inn")
         self.checkboxGroup = QtWidgets.QButtonGroup(NameEvaluator)
         self.checkboxGroup.setObjectName("checkboxGroup")
         self.checkboxGroup.setExclusive(False)
         self.checkboxGroup.addButton(self.checkbox_inn)
         self.horizontalLayout_4.addWidget(self.checkbox_inn)
-        self.verticalLayout_2.addLayout(self.horizontalLayout_4)
-        self.horizontalLayout_3 = QtWidgets.QHBoxLayout()
+        self.verticalLayout_2.addWidget(self.group_inn)
+        self.group_market_research = QtWidgets.QGroupBox(self.main_tab)
+        self.group_market_research.setStyleSheet("")
+        self.group_market_research.setObjectName("group_market_research")
+        self.horizontalLayout_3 = QtWidgets.QHBoxLayout(self.group_market_research)
         self.horizontalLayout_3.setObjectName("horizontalLayout_3")
-        self.checkbox_market_research = QtWidgets.QCheckBox(self.main_tab)
+        self.checkbox_market_research = QtWidgets.QCheckBox(self.group_market_research)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -182,10 +280,12 @@ class Ui_NameEvaluator(object):
         self.checkbox_market_research.setObjectName("checkbox_market_research")
         self.checkboxGroup.addButton(self.checkbox_market_research)
         self.horizontalLayout_3.addWidget(self.checkbox_market_research)
-        self.verticalLayout_2.addLayout(self.horizontalLayout_3)
-        self.horizontalLayout_2 = QtWidgets.QHBoxLayout()
+        self.verticalLayout_2.addWidget(self.group_market_research)
+        self.group_linguistics = QtWidgets.QGroupBox(self.main_tab)
+        self.group_linguistics.setObjectName("group_linguistics")
+        self.horizontalLayout_2 = QtWidgets.QHBoxLayout(self.group_linguistics)
         self.horizontalLayout_2.setObjectName("horizontalLayout_2")
-        self.checkbox_linguistic = QtWidgets.QCheckBox(self.main_tab)
+        self.checkbox_linguistic = QtWidgets.QCheckBox(self.group_linguistics)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -197,10 +297,12 @@ class Ui_NameEvaluator(object):
         self.checkbox_linguistic.setObjectName("checkbox_linguistic")
         self.checkboxGroup.addButton(self.checkbox_linguistic)
         self.horizontalLayout_2.addWidget(self.checkbox_linguistic)
-        self.verticalLayout_2.addLayout(self.horizontalLayout_2)
-        self.horizontalLayout_5 = QtWidgets.QHBoxLayout()
+        self.verticalLayout_2.addWidget(self.group_linguistics)
+        self.group_competitor = QtWidgets.QGroupBox(self.main_tab)
+        self.group_competitor.setObjectName("group_competitor")
+        self.horizontalLayout_5 = QtWidgets.QHBoxLayout(self.group_competitor)
         self.horizontalLayout_5.setObjectName("horizontalLayout_5")
-        self.checkbox_competitor = QtWidgets.QCheckBox(self.main_tab)
+        self.checkbox_competitor = QtWidgets.QCheckBox(self.group_competitor)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -212,10 +314,12 @@ class Ui_NameEvaluator(object):
         self.checkbox_competitor.setObjectName("checkbox_competitor")
         self.checkboxGroup.addButton(self.checkbox_competitor)
         self.horizontalLayout_5.addWidget(self.checkbox_competitor)
-        self.verticalLayout_2.addLayout(self.horizontalLayout_5)
-        self.horizontalLayout_7 = QtWidgets.QHBoxLayout()
+        self.verticalLayout_2.addWidget(self.group_competitor)
+        self.group_project_avoids = QtWidgets.QGroupBox(self.main_tab)
+        self.group_project_avoids.setObjectName("group_project_avoids")
+        self.horizontalLayout_7 = QtWidgets.QHBoxLayout(self.group_project_avoids)
         self.horizontalLayout_7.setObjectName("horizontalLayout_7")
-        self.checkbox_project = QtWidgets.QCheckBox(self.main_tab)
+        self.checkbox_project = QtWidgets.QCheckBox(self.group_project_avoids)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -227,16 +331,11 @@ class Ui_NameEvaluator(object):
         self.checkbox_project.setObjectName("checkbox_project")
         self.checkboxGroup.addButton(self.checkbox_project)
         self.horizontalLayout_7.addWidget(self.checkbox_project)
-        self.verticalLayout_2.addLayout(self.horizontalLayout_7)
-        spacerItem1 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Minimum)
-        self.verticalLayout_2.addItem(spacerItem1)
+        self.verticalLayout_2.addWidget(self.group_project_avoids)
         spacerItem2 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Minimum)
         self.verticalLayout_2.addItem(spacerItem2)
         spacerItem3 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Minimum)
         self.verticalLayout_2.addItem(spacerItem3)
-        self.horizontalLayout_10 = QtWidgets.QHBoxLayout()
-        self.horizontalLayout_10.setObjectName("horizontalLayout_10")
-        self.verticalLayout_2.addLayout(self.horizontalLayout_10)
         self.horizontalLayout.addLayout(self.verticalLayout_2)
         self.line_9 = QtWidgets.QFrame(self.main_tab)
         self.line_9.setFrameShape(QtWidgets.QFrame.VLine)
@@ -255,10 +354,13 @@ class Ui_NameEvaluator(object):
         self.name_rationale_label_2.setSizePolicy(sizePolicy)
         self.name_rationale_label_2.setMinimumSize(QtCore.QSize(0, 0))
         font = QtGui.QFont()
+        font.setFamily("Cambria")
+        font.setPointSize(14)
         font.setBold(True)
         font.setItalic(False)
         font.setWeight(75)
         self.name_rationale_label_2.setFont(font)
+        self.name_rationale_label_2.setStyleSheet("")
         self.name_rationale_label_2.setAlignment(QtCore.Qt.AlignCenter)
         self.name_rationale_label_2.setObjectName("name_rationale_label_2")
         self.verticalLayout_3.addWidget(self.name_rationale_label_2)
@@ -270,23 +372,33 @@ class Ui_NameEvaluator(object):
         self.text_names.setSizePolicy(sizePolicy)
         self.text_names.setMaximumSize(QtCore.QSize(120, 16777215))
         font = QtGui.QFont()
-        font.setPointSize(9)
+        font.setFamily("Cambria")
+        font.setPointSize(10)
+        font.setBold(False)
+        font.setItalic(False)
+        font.setWeight(50)
         self.text_names.setFont(font)
+        self.text_names.setStyleSheet("")
         self.text_names.setLineWrapMode(QtWidgets.QPlainTextEdit.NoWrap)
         self.text_names.setObjectName("text_names")
         self.verticalLayout_3.addWidget(self.text_names)
         self.horizontalLayout_19 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_19.setContentsMargins(-1, 5, -1, 5)
         self.horizontalLayout_19.setObjectName("horizontalLayout_19")
-        self.btn_check_names = QtWidgets.QToolButton(self.main_tab)
+        self.btn_check_names = QtWidgets.QPushButton(self.main_tab)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.btn_check_names.sizePolicy().hasHeightForWidth())
         self.btn_check_names.setSizePolicy(sizePolicy)
         font = QtGui.QFont()
-        font.setPointSize(7)
+        font.setFamily("Cambria")
+        font.setPointSize(10)
+        font.setBold(False)
+        font.setItalic(False)
+        font.setWeight(50)
         self.btn_check_names.setFont(font)
+        self.btn_check_names.setStyleSheet("")
         self.btn_check_names.setObjectName("btn_check_names")
         self.horizontalLayout_19.addWidget(self.btn_check_names)
         self.verticalLayout_3.addLayout(self.horizontalLayout_19)
@@ -294,14 +406,17 @@ class Ui_NameEvaluator(object):
         self.horizontalLayout_6.setObjectName("horizontalLayout_6")
         self.btn_upper_case = QtWidgets.QToolButton(self.main_tab)
         self.btn_upper_case.setToolTip("")
+        self.btn_upper_case.setStyleSheet("")
         self.btn_upper_case.setObjectName("btn_upper_case")
         self.horizontalLayout_6.addWidget(self.btn_upper_case)
         self.btn_title_case = QtWidgets.QToolButton(self.main_tab)
         self.btn_title_case.setToolTip("")
+        self.btn_title_case.setStyleSheet("")
         self.btn_title_case.setObjectName("btn_title_case")
         self.horizontalLayout_6.addWidget(self.btn_title_case)
         self.btn_lower_case = QtWidgets.QToolButton(self.main_tab)
         self.btn_lower_case.setToolTip("")
+        self.btn_lower_case.setStyleSheet("")
         self.btn_lower_case.setObjectName("btn_lower_case")
         self.horizontalLayout_6.addWidget(self.btn_lower_case)
         self.verticalLayout_3.addLayout(self.horizontalLayout_6)
@@ -321,6 +436,8 @@ class Ui_NameEvaluator(object):
         sizePolicy.setHeightForWidth(self.name_conflict_label.sizePolicy().hasHeightForWidth())
         self.name_conflict_label.setSizePolicy(sizePolicy)
         font = QtGui.QFont()
+        font.setFamily("Cambria")
+        font.setPointSize(14)
         font.setBold(True)
         font.setItalic(False)
         font.setWeight(75)
@@ -329,8 +446,12 @@ class Ui_NameEvaluator(object):
         self.name_conflict_label.setObjectName("name_conflict_label")
         self.verticalLayout_7.addWidget(self.name_conflict_label)
         self.qtable_results = QtWidgets.QTableView(self.main_tab)
+        self.qtable_results.setStyleSheet("")
+        self.qtable_results.setFrameShadow(QtWidgets.QFrame.Plain)
         self.qtable_results.setEditTriggers(QtWidgets.QAbstractItemView.NoEditTriggers)
         self.qtable_results.setObjectName("qtable_results")
+        self.qtable_results.verticalHeader().setCascadingSectionResizes(True)
+        self.qtable_results.verticalHeader().setMinimumSectionSize(23)
         self.verticalLayout_7.addWidget(self.qtable_results)
         self.lineedit_ignore = QtWidgets.QLineEdit(self.main_tab)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.MinimumExpanding, QtWidgets.QSizePolicy.Fixed)
@@ -338,6 +459,7 @@ class Ui_NameEvaluator(object):
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.lineedit_ignore.sizePolicy().hasHeightForWidth())
         self.lineedit_ignore.setSizePolicy(sizePolicy)
+        self.lineedit_ignore.setStyleSheet("")
         self.lineedit_ignore.setObjectName("lineedit_ignore")
         self.verticalLayout_7.addWidget(self.lineedit_ignore)
         self.horizontalLayout.addLayout(self.verticalLayout_7)
@@ -353,13 +475,21 @@ class Ui_NameEvaluator(object):
         self.btn_exit.setMinimumSize(QtCore.QSize(94, 0))
         self.btn_exit.setMaximumSize(QtCore.QSize(16777215, 28))
         font = QtGui.QFont()
-        font.setBold(True)
+        font.setFamily("Cambria")
+        font.setPointSize(10)
+        font.setBold(False)
         font.setItalic(False)
-        font.setWeight(75)
+        font.setWeight(50)
         self.btn_exit.setFont(font)
         self.btn_exit.setStyleSheet(":hover{\n"
-"color:red;\n"
-"}")
+"    font: 75 12pt \"Cambria\";\n"
+"    background-color:#FFD241;\n"
+"}\n"
+"QPushButton{\n"
+"background-color: #C1052F;\n"
+"color: white;\n"
+"}\n"
+"")
         self.btn_exit.setObjectName("btn_exit")
         self.horizontalLayout_21.addWidget(self.btn_exit)
         spacerItem4 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
@@ -373,9 +503,7 @@ class Ui_NameEvaluator(object):
         self.gridLayout_5 = QtWidgets.QGridLayout()
         self.gridLayout_5.setObjectName("gridLayout_5")
         spacerItem5 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
-        self.gridLayout_5.addItem(spacerItem5, 1, 4, 1, 1)
-        spacerItem6 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
-        self.gridLayout_5.addItem(spacerItem6, 1, 5, 1, 1)
+        self.gridLayout_5.addItem(spacerItem5, 1, 3, 1, 1)
         self.gridLayout_6 = QtWidgets.QGridLayout()
         self.gridLayout_6.setSizeConstraint(QtWidgets.QLayout.SetDefaultConstraint)
         self.gridLayout_6.setObjectName("gridLayout_6")
@@ -425,9 +553,9 @@ class Ui_NameEvaluator(object):
         self.label_all_avoids.setObjectName("label_all_avoids")
         self.horizontalLayout_12.addWidget(self.label_all_avoids, 0, QtCore.Qt.AlignHCenter)
         self.gridLayout_6.addLayout(self.horizontalLayout_12, 0, 3, 1, 1)
-        self.gridLayout_5.addLayout(self.gridLayout_6, 1, 6, 1, 1)
-        spacerItem7 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
-        self.gridLayout_5.addItem(spacerItem7, 1, 1, 1, 1)
+        self.gridLayout_5.addLayout(self.gridLayout_6, 1, 4, 1, 1)
+        spacerItem6 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        self.gridLayout_5.addItem(spacerItem6, 1, 1, 1, 1)
         self.gridLayout_4 = QtWidgets.QGridLayout()
         self.gridLayout_4.setSizeConstraint(QtWidgets.QLayout.SetNoConstraint)
         self.gridLayout_4.setObjectName("gridLayout_4")
@@ -460,13 +588,11 @@ class Ui_NameEvaluator(object):
         self.horizontalLayout_9.addWidget(self.text_competitor)
         self.gridLayout_4.addLayout(self.horizontalLayout_9, 3, 0, 1, 1)
         self.gridLayout_5.addLayout(self.gridLayout_4, 1, 0, 1, 1)
-        spacerItem8 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
-        self.gridLayout_5.addItem(spacerItem8, 1, 2, 1, 1)
         self.line = QtWidgets.QFrame(self.avoids_tab)
         self.line.setFrameShape(QtWidgets.QFrame.VLine)
         self.line.setFrameShadow(QtWidgets.QFrame.Sunken)
         self.line.setObjectName("line")
-        self.gridLayout_5.addWidget(self.line, 1, 3, 1, 1)
+        self.gridLayout_5.addWidget(self.line, 1, 2, 1, 1)
         self.gridLayout_3.addLayout(self.gridLayout_5, 0, 0, 1, 1)
         self.MainTab.addTab(self.avoids_tab, "")
         self.gridLayout_2.addWidget(self.MainTab, 0, 0, 1, 1)
@@ -529,14 +655,17 @@ class Ui_NameEvaluator(object):
     def retranslateUi(self, NameEvaluator):
         _translate = QtCore.QCoreApplication.translate
         NameEvaluator.setWindowTitle(_translate("NameEvaluator", "NameEvaluator"))
+        self.label_2.setText(_translate("NameEvaluator", "Name Evaluator"))
+        self.label.setText(_translate("NameEvaluator", "<html><head/><body><p><img src=\":/img_/Leaderboard_Icon_RGB.jpg\"/></p></body></html>"))
         self.name_rationale_label_3.setStatusTip(_translate("NameEvaluator", "Choose what you would like to screen against"))
         self.name_rationale_label_3.setText(_translate("NameEvaluator", "Screen against:"))
         self.checkbox_all.setStatusTip(_translate("NameEvaluator", "Check or uncheck all options [Ctrl+Shift+A]"))
         self.checkbox_all.setText(_translate("NameEvaluator", "Check / Uncheck All"))
         self.checkbox_inn.setStatusTip(_translate("NameEvaluator", "Check against INN avoids"))
         self.checkbox_inn.setText(_translate("NameEvaluator", "INN"))
+        self.group_market_research.setWhatsThis(_translate("NameEvaluator", "checkboxContainer"))
         self.checkbox_market_research.setStatusTip(_translate("NameEvaluator", "Check against market research avoids"))
-        self.checkbox_market_research.setText(_translate("NameEvaluator", "Market Resarch"))
+        self.checkbox_market_research.setText(_translate("NameEvaluator", "Market Research"))
         self.checkbox_linguistic.setStatusTip(_translate("NameEvaluator", "Check against project specific avoids"))
         self.checkbox_linguistic.setText(_translate("NameEvaluator", "Linguistics"))
         self.checkbox_competitor.setStatusTip(_translate("NameEvaluator", "Check against competitor names"))
@@ -595,6 +724,7 @@ class Ui_NameEvaluator(object):
         self.actionINN_avoids.setText(_translate("NameEvaluator", "INN Avoids"))
         self.actionPharma_avoids.setText(_translate("NameEvaluator", "Pharma Avoids"))
         self.actionAdd_avoids.setText(_translate("NameEvaluator", "Add Avoids"))
+import src.UI.resource_rc
 
 
 if __name__ == "__main__":

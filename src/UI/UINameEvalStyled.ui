@@ -129,8 +129,7 @@ background-color: #55565A;
        <bool>false</bool>
       </property>
       <property name="styleSheet">
-       <string notr="true">
-QWidget{
+       <string notr="true">QWidget{
 background-color:#006B3F;
 }
 QLabel{
@@ -140,35 +139,72 @@ color:white;
 }
 QPlainTextEdit {
 background-color:white;
+border-top:1px solid #A9A8A9;
+border-left: 2px solid #A9A8A9;
+border-right: 2px solid #A9A8A9;
+border-bottom: 2px solid #A9A8A9;
 }
 QTableView {
 background-color:white;
-border:None
+border-top:1px solid #A9A8A9;
+border-left: 2px solid #A9A8A9;
+border-right: 2px solid #A9A8A9;
+border-bottom: 2px solid #A9A8A9;
 }
 QLineEdit{
 background-color: white;
+border-top:1px solid #A9A8A9;
+border-left: 2px solid #A9A8A9;
+border-right: 2px solid #A9A8A9;
+border-bottom: 2px solid #A9A8A9;
 }
 QToolButton{
 background-color: #4F748B;
+border-top:1px solid #9BB7D3;
+border-left: 2px solid #9BB7D3;
+border-right: 2px solid #9BB7D3;
+border-bottom: 5px solid #9BB7D3;
+color:#9BB7D3;
+font-weight:bold;
 }
 QToolButton:hover{
 background-color: #9BB7D3;
 color:white;
 }
+QToolButton:pressed{
+background-color: #9BB7D3;
+color:white;
+border-top:5px solid white;
+border-left: 2px solid white;
+border-right: 2px solid white;
+border-bottom: 1px solid white;
+}
 QPushButton{
-background-color: #26D07C;
-border: 2px solid #55565A;
-border-radius: 6px;
+background-color: #006B3F;
+border-top:1px solid #26D07C;
+border-left: 2px solid #26D07C;
+border-right: 2px solid #26D07C;
+border-bottom: 5px solid #26D07C;
+border-radius: 2px;
+color:#26D07C;
+font-weight:bold;
 }
 QPushButton:hover{
-background-color:#D0B888;
-border: 1px solid white;
+background-color:#26D07C;
 color:white;
+}
+QPushButton:pressed{
+background-color: #006B3F;
+border-top:5px solid white;
+border-left: 2px solid white;
+border-right: 2px solid white;
+border-bottom: 2px solid white;
+border-radius: 2px;
 }
 QGroupBox{
 background-color: #26D07C;
-border: 2px solid  #55565A;
-border-radius:6px;
+border:none;
+font-weight:bold;
 }
 QGroupBox:hover{
 background-color: #A9A8A9;
@@ -176,20 +212,22 @@ background-color: #A9A8A9;
 QCheckBox{
 border: None;
 background-color: None;
+font-weight:bold;
+
 }
 QCheckBox:hover{
 color:white;
 }
 
 QTabWidget QTabBar::tab{
-background-color: #A9A8A9;
+background-color: #006B3F;
 height: 25px;
 width: 256px;
 color:white;
 font-weight:bold;
 }
 QTabWidget QTabBar::tab:selected{
-background-color: #006B3F;
+background-color: #26D07C;
 width: 256px;
 color:white;
 }
@@ -216,6 +254,9 @@ background-color: None;
          <layout class="QHBoxLayout" name="horizontalLayout">
           <item>
            <layout class="QVBoxLayout" name="verticalLayout_2">
+            <property name="spacing">
+             <number>0</number>
+            </property>
             <property name="topMargin">
              <number>0</number>
             </property>
@@ -673,9 +714,9 @@ background-color: None;
                  <font>
                   <family>Cambria</family>
                   <pointsize>10</pointsize>
-                  <weight>50</weight>
+                  <weight>75</weight>
                   <italic>false</italic>
-                  <bold>false</bold>
+                  <bold>true</bold>
                  </font>
                 </property>
                 <property name="statusTip">
@@ -853,9 +894,9 @@ background-color: None;
              <font>
               <family>Cambria</family>
               <pointsize>10</pointsize>
-              <weight>50</weight>
+              <weight>75</weight>
               <italic>false</italic>
-              <bold>false</bold>
+              <bold>true</bold>
              </font>
             </property>
             <property name="statusTip">
@@ -864,11 +905,17 @@ background-color: None;
             <property name="styleSheet">
              <string notr="true">:hover{
 	font: 75 12pt &quot;Cambria&quot;;
-	background-color:#FFD241;
+	background-color:#D0B888;
+	border-color:#D0B888;
 }
 QPushButton{
 background-color: #C1052F;
 color: white;
+border-top:1px solid black;
+border-left: 2px solid black;
+border-right: 2px solid black;
+border-bottom: 3px solid black;
+font-weight:bold;
 }
 </string>
             </property>
@@ -1054,6 +1101,16 @@ color: white;
                </widget>
               </item>
               <item>
+               <widget class="Line" name="line_2">
+                <property name="lineWidth">
+                 <number>2</number>
+                </property>
+                <property name="orientation">
+                 <enum>Qt::Vertical</enum>
+                </property>
+               </widget>
+              </item>
+              <item>
                <widget class="QLabel" name="label_competitor">
                 <property name="text">
                  <string>Competitor to Add</string>
@@ -1091,6 +1148,13 @@ color: white;
                   <width>300</width>
                   <height>16777215</height>
                  </size>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="Line" name="line_3">
+                <property name="orientation">
+                 <enum>Qt::Vertical</enum>
                 </property>
                </widget>
               </item>

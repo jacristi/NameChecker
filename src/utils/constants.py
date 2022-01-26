@@ -30,6 +30,8 @@ INFIX = 'infix'
 SUFFIX = 'suffix'
 ANYWHERE = 'anywhere'
 STRING_COMPARE = 'string_compare'
+STRING_COMPARE_COMBO = 'combo'
 
+STRING_COMPARE_MINIMUM = int(CONFIG.get("STRING_COMPARE_MINIMUM", 3))
 FIX_SIGNIFIERS = CONFIG.get('FIX_SIGNIFIERS', '-,~').split(',')
 ANYWHERE_SIGNIFIERS = CONFIG.get('ANYWHERE_SIGNIFIERS', '",*').split(',')

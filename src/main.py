@@ -93,8 +93,7 @@ class UIMain(QMainWindow):
     def get_and_strip_names(self):
         """ """
         names_list_text = self.ui.text_names.toPlainText()
-        self.names_list = [i.strip() for i in names_list_text.split('\n') if i.strip()]
-
+        self.names_list = sorted(list({i.strip() for i in names_list_text.split('\n') if i.strip()}))
 
     @error_handler
     def check_names(self, val):
@@ -295,5 +294,6 @@ if __name__ == '__main__':
 
 ### TODO incorporate LBB logo and style guide
 ### TODO update all item tooltips
-### TODO keyboard short-cuts
+### TODO keyboard short-cuts (ctrl+enter when text_names is focus will check names; tab in project avoids text will move to competitor text)
 ### TODO improved avodis table sort functionality ("waterfall sort")
+### TODO better scrollbars

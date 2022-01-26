@@ -120,8 +120,7 @@ class Ui_NameEvaluator(object):
         font.setKerning(False)
         self.MainTab.setFont(font)
         self.MainTab.setMouseTracking(False)
-        self.MainTab.setStyleSheet("\n"
-"QWidget{\n"
+        self.MainTab.setStyleSheet("QWidget{\n"
 "background-color:#006B3F;\n"
 "}\n"
 "QLabel{\n"
@@ -131,35 +130,72 @@ class Ui_NameEvaluator(object):
 "}\n"
 "QPlainTextEdit {\n"
 "background-color:white;\n"
+"border-top:1px solid #A9A8A9;\n"
+"border-left: 2px solid #A9A8A9;\n"
+"border-right: 2px solid #A9A8A9;\n"
+"border-bottom: 2px solid #A9A8A9;\n"
 "}\n"
 "QTableView {\n"
 "background-color:white;\n"
-"border:None\n"
+"border-top:1px solid #A9A8A9;\n"
+"border-left: 2px solid #A9A8A9;\n"
+"border-right: 2px solid #A9A8A9;\n"
+"border-bottom: 2px solid #A9A8A9;\n"
 "}\n"
 "QLineEdit{\n"
 "background-color: white;\n"
+"border-top:1px solid #A9A8A9;\n"
+"border-left: 2px solid #A9A8A9;\n"
+"border-right: 2px solid #A9A8A9;\n"
+"border-bottom: 2px solid #A9A8A9;\n"
 "}\n"
 "QToolButton{\n"
 "background-color: #4F748B;\n"
+"border-top:1px solid #9BB7D3;\n"
+"border-left: 2px solid #9BB7D3;\n"
+"border-right: 2px solid #9BB7D3;\n"
+"border-bottom: 5px solid #9BB7D3;\n"
+"color:#9BB7D3;\n"
+"font-weight:bold;\n"
 "}\n"
 "QToolButton:hover{\n"
 "background-color: #9BB7D3;\n"
 "color:white;\n"
 "}\n"
+"QToolButton:pressed{\n"
+"background-color: #9BB7D3;\n"
+"color:white;\n"
+"border-top:5px solid white;\n"
+"border-left: 2px solid white;\n"
+"border-right: 2px solid white;\n"
+"border-bottom: 1px solid white;\n"
+"}\n"
 "QPushButton{\n"
-"background-color: #26D07C;\n"
-"border: 2px solid #55565A;\n"
-"border-radius: 6px;\n"
+"background-color: #006B3F;\n"
+"border-top:1px solid #26D07C;\n"
+"border-left: 2px solid #26D07C;\n"
+"border-right: 2px solid #26D07C;\n"
+"border-bottom: 5px solid #26D07C;\n"
+"border-radius: 2px;\n"
+"color:#26D07C;\n"
+"font-weight:bold;\n"
 "}\n"
 "QPushButton:hover{\n"
-"background-color:#D0B888;\n"
-"border: 1px solid white;\n"
+"background-color:#26D07C;\n"
 "color:white;\n"
+"}\n"
+"QPushButton:pressed{\n"
+"background-color: #006B3F;\n"
+"border-top:5px solid white;\n"
+"border-left: 2px solid white;\n"
+"border-right: 2px solid white;\n"
+"border-bottom: 2px solid white;\n"
+"border-radius: 2px;\n"
 "}\n"
 "QGroupBox{\n"
 "background-color: #26D07C;\n"
-"border: 2px solid  #55565A;\n"
-"border-radius:6px;\n"
+"border:none;\n"
+"font-weight:bold;\n"
 "}\n"
 "QGroupBox:hover{\n"
 "background-color: #A9A8A9;\n"
@@ -167,20 +203,22 @@ class Ui_NameEvaluator(object):
 "QCheckBox{\n"
 "border: None;\n"
 "background-color: None;\n"
+"font-weight:bold;\n"
+"\n"
 "}\n"
 "QCheckBox:hover{\n"
 "color:white;\n"
 "}\n"
 "\n"
 "QTabWidget QTabBar::tab{\n"
-"background-color: #A9A8A9;\n"
+"background-color: #006B3F;\n"
 "height: 25px;\n"
 "width: 256px;\n"
 "color:white;\n"
 "font-weight:bold;\n"
 "}\n"
 "QTabWidget QTabBar::tab:selected{\n"
-"background-color: #006B3F;\n"
+"background-color: #26D07C;\n"
 "width: 256px;\n"
 "color:white;\n"
 "}\n"
@@ -199,6 +237,7 @@ class Ui_NameEvaluator(object):
         self.horizontalLayout.setObjectName("horizontalLayout")
         self.verticalLayout_2 = QtWidgets.QVBoxLayout()
         self.verticalLayout_2.setContentsMargins(-1, 0, -1, -1)
+        self.verticalLayout_2.setSpacing(0)
         self.verticalLayout_2.setObjectName("verticalLayout_2")
         self.label_2 = QtWidgets.QLabel(self.main_tab)
         self.label_2.setObjectName("label_2")
@@ -394,9 +433,9 @@ class Ui_NameEvaluator(object):
         font = QtGui.QFont()
         font.setFamily("Cambria")
         font.setPointSize(10)
-        font.setBold(False)
+        font.setBold(True)
         font.setItalic(False)
-        font.setWeight(50)
+        font.setWeight(75)
         self.btn_check_names.setFont(font)
         self.btn_check_names.setStyleSheet("")
         self.btn_check_names.setObjectName("btn_check_names")
@@ -477,17 +516,23 @@ class Ui_NameEvaluator(object):
         font = QtGui.QFont()
         font.setFamily("Cambria")
         font.setPointSize(10)
-        font.setBold(False)
+        font.setBold(True)
         font.setItalic(False)
-        font.setWeight(50)
+        font.setWeight(75)
         self.btn_exit.setFont(font)
         self.btn_exit.setStyleSheet(":hover{\n"
 "    font: 75 12pt \"Cambria\";\n"
-"    background-color:#FFD241;\n"
+"    background-color:#D0B888;\n"
+"    border-color:#D0B888;\n"
 "}\n"
 "QPushButton{\n"
 "background-color: #C1052F;\n"
 "color: white;\n"
+"border-top:1px solid black;\n"
+"border-left: 2px solid black;\n"
+"border-right: 2px solid black;\n"
+"border-bottom: 3px solid black;\n"
+"font-weight:bold;\n"
 "}\n"
 "")
         self.btn_exit.setObjectName("btn_exit")
@@ -565,6 +610,12 @@ class Ui_NameEvaluator(object):
         self.label_project_avoids.setAlignment(QtCore.Qt.AlignCenter)
         self.label_project_avoids.setObjectName("label_project_avoids")
         self.horizontalLayout_8.addWidget(self.label_project_avoids)
+        self.line_2 = QtWidgets.QFrame(self.avoids_tab)
+        self.line_2.setLineWidth(2)
+        self.line_2.setFrameShape(QtWidgets.QFrame.VLine)
+        self.line_2.setFrameShadow(QtWidgets.QFrame.Sunken)
+        self.line_2.setObjectName("line_2")
+        self.horizontalLayout_8.addWidget(self.line_2)
         self.label_competitor = QtWidgets.QLabel(self.avoids_tab)
         self.label_competitor.setAlignment(QtCore.Qt.AlignCenter)
         self.label_competitor.setObjectName("label_competitor")
@@ -583,6 +634,11 @@ class Ui_NameEvaluator(object):
         self.text_project_avoids.setMaximumSize(QtCore.QSize(300, 16777215))
         self.text_project_avoids.setObjectName("text_project_avoids")
         self.horizontalLayout_9.addWidget(self.text_project_avoids)
+        self.line_3 = QtWidgets.QFrame(self.avoids_tab)
+        self.line_3.setFrameShape(QtWidgets.QFrame.VLine)
+        self.line_3.setFrameShadow(QtWidgets.QFrame.Sunken)
+        self.line_3.setObjectName("line_3")
+        self.horizontalLayout_9.addWidget(self.line_3)
         self.text_competitor = QtWidgets.QPlainTextEdit(self.avoids_tab)
         self.text_competitor.setObjectName("text_competitor")
         self.horizontalLayout_9.addWidget(self.text_competitor)

@@ -106,24 +106,152 @@ max-height: 4px;
   </property>
   <widget class="QWidget" name="MainWindow">
    <property name="styleSheet">
-    <string notr="true">opacity: 0;</string>
+    <string notr="true">/*opacity: 0;
+font: 10pt &quot;Cambria&quot;;
+background-color: #55565A;
+</string>
    </property>
    <layout class="QGridLayout" name="gridLayout_2">
     <item row="0" column="0">
      <widget class="QTabWidget" name="MainTab">
       <property name="font">
        <font>
-        <weight>75</weight>
-        <bold>true</bold>
+        <family>Cambria</family>
+        <pointsize>10</pointsize>
+        <weight>50</weight>
+        <italic>false</italic>
+        <bold>false</bold>
         <underline>false</underline>
         <kerning>false</kerning>
        </font>
       </property>
-      <property name="mouseTracking">
-       <bool>false</bool>
-      </property>
       <property name="styleSheet">
-       <string notr="true"/>
+       <string notr="true">/*QWidget{
+background-color:#006B3F;
+}
+QLabel{
+font: 75 14pt &quot;Cambria&quot;;
+font-weight:bold;
+color:white;
+}
+QPlainTextEdit {
+background-color:white;
+border-top:1px solid #A9A8A9;
+border-left: 2px solid #A9A8A9;
+border-right: 2px solid #A9A8A9;
+border-bottom: 2px solid #A9A8A9;
+}
+QTableView {
+background-color:white;
+border-top:1px solid #A9A8A9;
+border-left: 2px solid #A9A8A9;
+border-right: 2px solid #A9A8A9;
+border-bottom: 2px solid #A9A8A9;
+}
+QLineEdit{
+background-color: white;
+border-top:1px solid #A9A8A9;
+border-left: 2px solid #A9A8A9;
+border-right: 2px solid #A9A8A9;
+border-bottom: 2px solid #A9A8A9;
+}
+QToolButton{
+background-color: #4F748B;
+border-top:1px solid #9BB7D3;
+border-left: 2px solid #9BB7D3;
+border-right: 2px solid #9BB7D3;
+border-bottom: 5px solid #9BB7D3;
+color:#9BB7D3;
+font-weight:bold;
+}
+QToolButton:hover{
+background-color: #9BB7D3;
+color:white;
+}
+QToolButton:pressed{
+background-color: #9BB7D3;
+color:white;
+border-top:5px solid white;
+border-left: 2px solid white;
+border-right: 2px solid white;
+border-bottom: 1px solid white;
+}
+QPushButton{
+background-color: #006B3F;
+border-top:1px solid #26D07C;
+border-left: 2px solid #26D07C;
+border-right: 2px solid #26D07C;
+border-bottom: 5px solid #26D07C;
+border-radius: 2px;
+color:#26D07C;
+font-weight:bold;
+}
+QPushButton:hover{
+background-color:#26D07C;
+color:white;
+}
+QPushButton:pressed{
+background-color: #006B3F;
+border-top:5px solid white;
+border-left: 2px solid white;
+border-right: 2px solid white;
+border-bottom: 2px solid white;
+border-radius: 2px;
+}
+QGroupBox{
+background-color: #26D07C;
+border:none;
+font-weight:bold;
+}
+QGroupBox:hover{
+background-color: #A9A8A9;
+}
+QCheckBox{
+border: None;
+background-color: None;
+font-weight:bold;
+
+}
+QCheckBox:hover{
+color:white;
+}
+
+QTabWidget QTabBar::tab{
+background-color: #006B3F;
+height: 25px;
+width: 256px;
+color:white;
+font-weight:bold;
+}
+QTabWidget QTabBar::tab:selected{
+background-color: #26D07C;
+width: 256px;
+color:white;
+}
+QCheckbox{
+border: None;
+background-color: None;
+}
+QScrollBar:vertical {
+background:#9BB7D3;
+}
+QScrollBar:handle{
+background:#4F748B;
+}
+QScrollBar:pressed{
+background:#A9A8A9;
+}
+QScrollBar::add-line:vertical {
+height: 0px;
+}
+QScrollBar::sub-line:vertical {
+height: 0px;
+}
+QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
+height: 0px;
+}
+
+</string>
       </property>
       <property name="tabPosition">
        <enum>QTabWidget::North</enum>
@@ -143,11 +271,50 @@ max-height: 4px;
          <layout class="QHBoxLayout" name="horizontalLayout">
           <item>
            <layout class="QVBoxLayout" name="verticalLayout_2">
+            <property name="spacing">
+             <number>0</number>
+            </property>
             <property name="topMargin">
              <number>0</number>
             </property>
             <item>
-             <spacer name="horizontalSpacer_12">
+             <widget class="QLabel" name="label_2">
+              <property name="text">
+               <string>Name Evaluator</string>
+              </property>
+             </widget>
+            </item>
+            <item alignment="Qt::AlignHCenter|Qt::AlignVCenter">
+             <widget class="QLabel" name="label">
+              <property name="maximumSize">
+               <size>
+                <width>150</width>
+                <height>150</height>
+               </size>
+              </property>
+              <property name="text">
+               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;img src=&quot;:/img_/Leaderboard_Icon_RGB.jpg&quot;/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <spacer name="horizontalSpacer_10">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeType">
+               <enum>QSizePolicy::Preferred</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item>
+             <spacer name="horizontalSpacer_7">
               <property name="orientation">
                <enum>Qt::Horizontal</enum>
               </property>
@@ -178,6 +345,8 @@ max-height: 4px;
               </property>
               <property name="font">
                <font>
+                <family>Cambria</family>
+                <pointsize>10</pointsize>
                 <weight>75</weight>
                 <italic>false</italic>
                 <bold>true</bold>
@@ -185,6 +354,9 @@ max-height: 4px;
               </property>
               <property name="statusTip">
                <string>Choose what you would like to screen against</string>
+              </property>
+              <property name="styleSheet">
+               <string notr="true"/>
               </property>
               <property name="text">
                <string>Screen against:</string>
@@ -195,212 +367,232 @@ max-height: 4px;
              </widget>
             </item>
             <item>
-             <layout class="QHBoxLayout" name="horizontalLayout_13">
-              <item>
-               <widget class="QCheckBox" name="checkbox_all">
-                <property name="toolTip">
-                 <string/>
-                </property>
-                <property name="statusTip">
-                 <string>Check or uncheck all options [Ctrl+Shift+A]</string>
-                </property>
-                <property name="text">
-                 <string>Check / Uncheck All</string>
-                </property>
-               </widget>
-              </item>
-             </layout>
-            </item>
-            <item>
-             <layout class="QHBoxLayout" name="horizontalLayout_4">
-              <item>
-               <widget class="QCheckBox" name="checkbox_inn">
-                <property name="enabled">
-                 <bool>true</bool>
-                </property>
-                <property name="sizePolicy">
-                 <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                  <horstretch>0</horstretch>
-                  <verstretch>0</verstretch>
-                 </sizepolicy>
-                </property>
-                <property name="maximumSize">
-                 <size>
-                  <width>16777215</width>
-                  <height>16777215</height>
-                 </size>
-                </property>
-                <property name="toolTip">
-                 <string/>
-                </property>
-                <property name="statusTip">
-                 <string>Check against INN avoids</string>
-                </property>
-                <property name="text">
-                 <string>INN</string>
-                </property>
-                <attribute name="buttonGroup">
-                 <string notr="true">checkboxGroup</string>
-                </attribute>
-               </widget>
-              </item>
-             </layout>
-            </item>
-            <item>
-             <layout class="QHBoxLayout" name="horizontalLayout_3">
-              <item>
-               <widget class="QCheckBox" name="checkbox_market_research">
-                <property name="sizePolicy">
-                 <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                  <horstretch>0</horstretch>
-                  <verstretch>0</verstretch>
-                 </sizepolicy>
-                </property>
-                <property name="maximumSize">
-                 <size>
-                  <width>16777215</width>
-                  <height>16777215</height>
-                 </size>
-                </property>
-                <property name="toolTip">
-                 <string/>
-                </property>
-                <property name="statusTip">
-                 <string>Check against market research avoids</string>
-                </property>
-                <property name="text">
-                 <string>Market Resarch</string>
-                </property>
-                <attribute name="buttonGroup">
-                 <string notr="true">checkboxGroup</string>
-                </attribute>
-               </widget>
-              </item>
-             </layout>
-            </item>
-            <item>
-             <layout class="QHBoxLayout" name="horizontalLayout_2">
-              <item>
-               <widget class="QCheckBox" name="checkbox_linguistic">
-                <property name="sizePolicy">
-                 <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                  <horstretch>0</horstretch>
-                  <verstretch>0</verstretch>
-                 </sizepolicy>
-                </property>
-                <property name="maximumSize">
-                 <size>
-                  <width>16777215</width>
-                  <height>16777215</height>
-                 </size>
-                </property>
-                <property name="toolTip">
-                 <string/>
-                </property>
-                <property name="statusTip">
-                 <string>Check against project specific avoids</string>
-                </property>
-                <property name="styleSheet">
-                 <string notr="true"/>
-                </property>
-                <property name="text">
-                 <string>Linguistics</string>
-                </property>
-                <attribute name="buttonGroup">
-                 <string notr="true">checkboxGroup</string>
-                </attribute>
-               </widget>
-              </item>
-             </layout>
-            </item>
-            <item>
-             <layout class="QHBoxLayout" name="horizontalLayout_5">
-              <item>
-               <widget class="QCheckBox" name="checkbox_competitor">
-                <property name="sizePolicy">
-                 <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                  <horstretch>0</horstretch>
-                  <verstretch>0</verstretch>
-                 </sizepolicy>
-                </property>
-                <property name="maximumSize">
-                 <size>
-                  <width>16777215</width>
-                  <height>16777215</height>
-                 </size>
-                </property>
-                <property name="toolTip">
-                 <string/>
-                </property>
-                <property name="statusTip">
-                 <string>Check against competitor names</string>
-                </property>
-                <property name="styleSheet">
-                 <string notr="true"/>
-                </property>
-                <property name="text">
-                 <string>Competitors</string>
-                </property>
-                <attribute name="buttonGroup">
-                 <string notr="true">checkboxGroup</string>
-                </attribute>
-               </widget>
-              </item>
-             </layout>
-            </item>
-            <item>
-             <layout class="QHBoxLayout" name="horizontalLayout_7">
-              <item>
-               <widget class="QCheckBox" name="checkbox_project">
-                <property name="sizePolicy">
-                 <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                  <horstretch>0</horstretch>
-                  <verstretch>0</verstretch>
-                 </sizepolicy>
-                </property>
-                <property name="maximumSize">
-                 <size>
-                  <width>16777215</width>
-                  <height>16777215</height>
-                 </size>
-                </property>
-                <property name="toolTip">
-                 <string/>
-                </property>
-                <property name="statusTip">
-                 <string>Check against project avoids</string>
-                </property>
-                <property name="styleSheet">
-                 <string notr="true"/>
-                </property>
-                <property name="text">
-                 <string>Project Avoids</string>
-                </property>
-                <attribute name="buttonGroup">
-                 <string notr="true">checkboxGroup</string>
-                </attribute>
-               </widget>
-              </item>
-             </layout>
-            </item>
-            <item>
-             <spacer name="horizontalSpacer_7">
-              <property name="orientation">
-               <enum>Qt::Horizontal</enum>
+             <widget class="QGroupBox" name="group_check_uncheck_all">
+              <property name="mouseTracking">
+               <bool>false</bool>
               </property>
-              <property name="sizeType">
-               <enum>QSizePolicy::Preferred</enum>
+              <property name="styleSheet">
+               <string notr="true"/>
               </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>40</width>
-                <height>20</height>
-               </size>
+              <property name="checkable">
+               <bool>false</bool>
               </property>
-             </spacer>
+              <layout class="QHBoxLayout" name="horizontalLayout_13">
+               <item>
+                <widget class="QCheckBox" name="checkbox_all">
+                 <property name="toolTip">
+                  <string/>
+                 </property>
+                 <property name="statusTip">
+                  <string>Check or uncheck all options [Ctrl+Shift+A]</string>
+                 </property>
+                 <property name="styleSheet">
+                  <string notr="true"/>
+                 </property>
+                 <property name="text">
+                  <string>Check / Uncheck All</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
             </item>
             <item>
-             <spacer name="horizontalSpacer_10">
+             <widget class="QGroupBox" name="group_inn">
+              <property name="styleSheet">
+               <string notr="true"/>
+              </property>
+              <layout class="QHBoxLayout" name="horizontalLayout_4">
+               <item>
+                <widget class="QCheckBox" name="checkbox_inn">
+                 <property name="enabled">
+                  <bool>true</bool>
+                 </property>
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="maximumSize">
+                  <size>
+                   <width>16777215</width>
+                   <height>16777215</height>
+                  </size>
+                 </property>
+                 <property name="toolTip">
+                  <string/>
+                 </property>
+                 <property name="statusTip">
+                  <string>Check against INN avoids</string>
+                 </property>
+                 <property name="styleSheet">
+                  <string notr="true"/>
+                 </property>
+                 <property name="text">
+                  <string>INN</string>
+                 </property>
+                 <attribute name="buttonGroup">
+                  <string notr="true">checkboxGroup</string>
+                 </attribute>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </item>
+            <item>
+             <widget class="QGroupBox" name="group_market_research">
+              <property name="whatsThis">
+               <string>checkboxContainer</string>
+              </property>
+              <property name="styleSheet">
+               <string notr="true"/>
+              </property>
+              <layout class="QHBoxLayout" name="horizontalLayout_3">
+               <item>
+                <widget class="QCheckBox" name="checkbox_market_research">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="maximumSize">
+                  <size>
+                   <width>16777215</width>
+                   <height>16777215</height>
+                  </size>
+                 </property>
+                 <property name="toolTip">
+                  <string/>
+                 </property>
+                 <property name="statusTip">
+                  <string>Check against market research avoids</string>
+                 </property>
+                 <property name="text">
+                  <string>Market Research</string>
+                 </property>
+                 <attribute name="buttonGroup">
+                  <string notr="true">checkboxGroup</string>
+                 </attribute>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </item>
+            <item>
+             <widget class="QGroupBox" name="group_linguistics">
+              <layout class="QHBoxLayout" name="horizontalLayout_2">
+               <item>
+                <widget class="QCheckBox" name="checkbox_linguistic">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="maximumSize">
+                  <size>
+                   <width>16777215</width>
+                   <height>16777215</height>
+                  </size>
+                 </property>
+                 <property name="toolTip">
+                  <string/>
+                 </property>
+                 <property name="statusTip">
+                  <string>Check against project specific avoids</string>
+                 </property>
+                 <property name="styleSheet">
+                  <string notr="true"/>
+                 </property>
+                 <property name="text">
+                  <string>Linguistics</string>
+                 </property>
+                 <attribute name="buttonGroup">
+                  <string notr="true">checkboxGroup</string>
+                 </attribute>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </item>
+            <item>
+             <widget class="QGroupBox" name="group_competitor">
+              <layout class="QHBoxLayout" name="horizontalLayout_5">
+               <item>
+                <widget class="QCheckBox" name="checkbox_competitor">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="maximumSize">
+                  <size>
+                   <width>16777215</width>
+                   <height>16777215</height>
+                  </size>
+                 </property>
+                 <property name="toolTip">
+                  <string/>
+                 </property>
+                 <property name="statusTip">
+                  <string>Check against competitor names</string>
+                 </property>
+                 <property name="styleSheet">
+                  <string notr="true"/>
+                 </property>
+                 <property name="text">
+                  <string>Competitors</string>
+                 </property>
+                 <attribute name="buttonGroup">
+                  <string notr="true">checkboxGroup</string>
+                 </attribute>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </item>
+            <item>
+             <widget class="QGroupBox" name="group_project_avoids">
+              <layout class="QHBoxLayout" name="horizontalLayout_7">
+               <item>
+                <widget class="QCheckBox" name="checkbox_project">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="maximumSize">
+                  <size>
+                   <width>16777215</width>
+                   <height>16777215</height>
+                  </size>
+                 </property>
+                 <property name="toolTip">
+                  <string/>
+                 </property>
+                 <property name="statusTip">
+                  <string>Check against project avoids</string>
+                 </property>
+                 <property name="styleSheet">
+                  <string notr="true"/>
+                 </property>
+                 <property name="text">
+                  <string>Project Avoids</string>
+                 </property>
+                 <attribute name="buttonGroup">
+                  <string notr="true">checkboxGroup</string>
+                 </attribute>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </item>
+            <item>
+             <spacer name="horizontalSpacer">
               <property name="orientation">
                <enum>Qt::Horizontal</enum>
               </property>
@@ -430,9 +622,6 @@ max-height: 4px;
                </size>
               </property>
              </spacer>
-            </item>
-            <item>
-             <layout class="QHBoxLayout" name="horizontalLayout_10"/>
             </item>
            </layout>
           </item>
@@ -467,6 +656,8 @@ max-height: 4px;
               </property>
               <property name="font">
                <font>
+                <family>Cambria</family>
+                <pointsize>10</pointsize>
                 <weight>75</weight>
                 <italic>false</italic>
                 <bold>true</bold>
@@ -474,6 +665,9 @@ max-height: 4px;
               </property>
               <property name="statusTip">
                <string>Your Names without rationale and/or notes</string>
+              </property>
+              <property name="styleSheet">
+               <string notr="true"/>
               </property>
               <property name="text">
                <string> Names</string>
@@ -499,11 +693,18 @@ max-height: 4px;
               </property>
               <property name="font">
                <font>
-                <pointsize>9</pointsize>
+                <family>Cambria</family>
+                <pointsize>10</pointsize>
+                <weight>50</weight>
+                <italic>false</italic>
+                <bold>false</bold>
                </font>
               </property>
               <property name="statusTip">
                <string>Enter all names to be checked against here</string>
+              </property>
+              <property name="styleSheet">
+               <string notr="true"/>
               </property>
               <property name="lineWrapMode">
                <enum>QPlainTextEdit::NoWrap</enum>
@@ -519,7 +720,7 @@ max-height: 4px;
                <number>5</number>
               </property>
               <item>
-               <widget class="QToolButton" name="btn_check_names">
+               <widget class="QPushButton" name="btn_check_names">
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
                   <horstretch>0</horstretch>
@@ -528,11 +729,18 @@ max-height: 4px;
                 </property>
                 <property name="font">
                  <font>
-                  <pointsize>7</pointsize>
+                  <family>Cambria</family>
+                  <pointsize>10</pointsize>
+                  <weight>75</weight>
+                  <italic>false</italic>
+                  <bold>true</bold>
                  </font>
                 </property>
                 <property name="statusTip">
                  <string>Commit and run names against all selected avoids</string>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true"/>
                 </property>
                 <property name="text">
                  <string>Check Names</string>
@@ -551,6 +759,9 @@ max-height: 4px;
                 <property name="statusTip">
                  <string>Set all names to uppercase</string>
                 </property>
+                <property name="styleSheet">
+                 <string notr="true"/>
+                </property>
                 <property name="text">
                  <string>ABC</string>
                 </property>
@@ -564,6 +775,9 @@ max-height: 4px;
                 <property name="statusTip">
                  <string>Set all names to title case</string>
                 </property>
+                <property name="styleSheet">
+                 <string notr="true"/>
+                </property>
                 <property name="text">
                  <string>Abc</string>
                 </property>
@@ -576,6 +790,9 @@ max-height: 4px;
                 </property>
                 <property name="statusTip">
                  <string>Set all names to lowercase</string>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true"/>
                 </property>
                 <property name="text">
                  <string>abc</string>
@@ -608,6 +825,8 @@ max-height: 4px;
               </property>
               <property name="font">
                <font>
+                <family>Cambria</family>
+                <pointsize>10</pointsize>
                 <weight>75</weight>
                 <italic>false</italic>
                 <bold>true</bold>
@@ -626,9 +845,24 @@ max-height: 4px;
               <property name="statusTip">
                <string>Results of avoid checks here</string>
               </property>
+              <property name="styleSheet">
+               <string notr="true"/>
+              </property>
+              <property name="frameShadow">
+               <enum>QFrame::Plain</enum>
+              </property>
+              <property name="verticalScrollBarPolicy">
+               <enum>Qt::ScrollBarAsNeeded</enum>
+              </property>
               <property name="editTriggers">
                <set>QAbstractItemView::NoEditTriggers</set>
               </property>
+              <attribute name="verticalHeaderCascadingSectionResizes">
+               <bool>true</bool>
+              </attribute>
+              <attribute name="verticalHeaderMinimumSectionSize">
+               <number>23</number>
+              </attribute>
              </widget>
             </item>
             <item>
@@ -641,6 +875,9 @@ max-height: 4px;
               </property>
               <property name="statusTip">
                <string>Enter a INN stems to be ignored (e.g vir, axo, imex)</string>
+              </property>
+              <property name="styleSheet">
+               <string notr="true"/>
               </property>
               <property name="placeholderText">
                <string>Enter INN stems to ignore here... (e.g. vir, axo, imex)</string>
@@ -675,6 +912,8 @@ max-height: 4px;
             </property>
             <property name="font">
              <font>
+              <family>Cambria</family>
+              <pointsize>10</pointsize>
               <weight>75</weight>
               <italic>false</italic>
               <bold>true</bold>
@@ -685,8 +924,20 @@ max-height: 4px;
             </property>
             <property name="styleSheet">
              <string notr="true">:hover{
-color:red;
-}</string>
+	font: 75 12pt &quot;Cambria&quot;;
+	background-color:#D0B888;
+	border-color:#D0B888;
+}
+QPushButton{
+background-color: #C1052F;
+color: white;
+border-top:1px solid black;
+border-left: 2px solid black;
+border-right: 2px solid black;
+border-bottom: 3px solid black;
+font-weight:bold;
+}
+</string>
             </property>
             <property name="text">
              <string>      Exit      </string>
@@ -717,20 +968,7 @@ color:red;
        <layout class="QGridLayout" name="gridLayout_3">
         <item row="0" column="0">
          <layout class="QGridLayout" name="gridLayout_5">
-          <item row="1" column="4">
-           <spacer name="verticalSpacer_4">
-            <property name="orientation">
-             <enum>Qt::Vertical</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>20</width>
-              <height>40</height>
-             </size>
-            </property>
-           </spacer>
-          </item>
-          <item row="1" column="5">
+          <item row="1" column="3">
            <spacer name="verticalSpacer_3">
             <property name="orientation">
              <enum>Qt::Vertical</enum>
@@ -743,7 +981,7 @@ color:red;
             </property>
            </spacer>
           </item>
-          <item row="1" column="6">
+          <item row="1" column="4">
            <layout class="QGridLayout" name="gridLayout_6">
             <property name="sizeConstraint">
              <enum>QLayout::SetDefaultConstraint</enum>
@@ -883,6 +1121,16 @@ color:red;
                </widget>
               </item>
               <item>
+               <widget class="Line" name="line_2">
+                <property name="lineWidth">
+                 <number>2</number>
+                </property>
+                <property name="orientation">
+                 <enum>Qt::Vertical</enum>
+                </property>
+               </widget>
+              </item>
+              <item>
                <widget class="QLabel" name="label_competitor">
                 <property name="text">
                  <string>Competitor to Add</string>
@@ -924,6 +1172,13 @@ color:red;
                </widget>
               </item>
               <item>
+               <widget class="Line" name="line_3">
+                <property name="orientation">
+                 <enum>Qt::Vertical</enum>
+                </property>
+               </widget>
+              </item>
+              <item>
                <widget class="QPlainTextEdit" name="text_competitor"/>
               </item>
              </layout>
@@ -931,19 +1186,6 @@ color:red;
            </layout>
           </item>
           <item row="1" column="2">
-           <spacer name="verticalSpacer_2">
-            <property name="orientation">
-             <enum>Qt::Vertical</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>20</width>
-              <height>40</height>
-             </size>
-            </property>
-           </spacer>
-          </item>
-          <item row="1" column="3">
            <widget class="Line" name="line">
             <property name="orientation">
              <enum>Qt::Vertical</enum>
@@ -1084,7 +1326,9 @@ color:red;
    </property>
   </action>
  </widget>
- <resources/>
+ <resources>
+  <include location="Resources.qrc"/>
+ </resources>
  <connections/>
  <buttongroups>
   <buttongroup name="checkboxGroup">

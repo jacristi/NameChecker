@@ -392,6 +392,9 @@ height: 0px;
                  <property name="text">
                   <string>Check / Uncheck All</string>
                  </property>
+                 <property name="shortcut">
+                  <string>Ctrl+Shift+A</string>
+                 </property>
                 </widget>
                </item>
               </layout>
@@ -744,6 +747,9 @@ height: 0px;
                 </property>
                 <property name="text">
                  <string>Check Names</string>
+                </property>
+                <property name="shortcut">
+                 <string>Ctrl+Return</string>
                 </property>
                </widget>
               </item>

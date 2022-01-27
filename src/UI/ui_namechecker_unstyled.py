@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file '.\src\UI\UINameEvalStyled.ui'
+# Form implementation generated from reading ui file '.\src\UI\UINameEval.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.4
 #
@@ -102,7 +102,7 @@ class Ui_NameEvaluator(object):
 "max-height: 4px;\n"
 "}")
         self.MainWindow = QtWidgets.QWidget(NameEvaluator)
-        self.MainWindow.setStyleSheet("opacity: 0;\n"
+        self.MainWindow.setStyleSheet("/*opacity: 0;\n"
 "font: 10pt \"Cambria\";\n"
 "background-color: #55565A;\n"
 "")
@@ -119,7 +119,7 @@ class Ui_NameEvaluator(object):
         font.setWeight(50)
         font.setKerning(False)
         self.MainTab.setFont(font)
-        self.MainTab.setStyleSheet("QWidget{\n"
+        self.MainTab.setStyleSheet("/*QWidget{\n"
 "background-color:#006B3F;\n"
 "}\n"
 "QLabel{\n"
@@ -278,7 +278,7 @@ class Ui_NameEvaluator(object):
         self.name_rationale_label_3.setMinimumSize(QtCore.QSize(0, 0))
         font = QtGui.QFont()
         font.setFamily("Cambria")
-        font.setPointSize(14)
+        font.setPointSize(10)
         font.setBold(True)
         font.setItalic(False)
         font.setWeight(75)
@@ -413,7 +413,7 @@ class Ui_NameEvaluator(object):
         self.name_rationale_label_2.setMinimumSize(QtCore.QSize(0, 0))
         font = QtGui.QFont()
         font.setFamily("Cambria")
-        font.setPointSize(14)
+        font.setPointSize(10)
         font.setBold(True)
         font.setItalic(False)
         font.setWeight(75)
@@ -495,7 +495,7 @@ class Ui_NameEvaluator(object):
         self.name_conflict_label.setSizePolicy(sizePolicy)
         font = QtGui.QFont()
         font.setFamily("Cambria")
-        font.setPointSize(14)
+        font.setPointSize(10)
         font.setBold(True)
         font.setItalic(False)
         font.setWeight(75)
@@ -737,7 +737,6 @@ class Ui_NameEvaluator(object):
         self.name_rationale_label_3.setText(_translate("NameEvaluator", "Screen against:"))
         self.checkbox_all.setStatusTip(_translate("NameEvaluator", "Check or uncheck all options [Ctrl+Shift+A]"))
         self.checkbox_all.setText(_translate("NameEvaluator", "Check / Uncheck All"))
-        self.checkbox_all.setShortcut(_translate("NameEvaluator", "Ctrl+Shift+A"))
         self.checkbox_inn.setStatusTip(_translate("NameEvaluator", "Check against INN avoids"))
         self.checkbox_inn.setText(_translate("NameEvaluator", "INN"))
         self.group_market_research.setWhatsThis(_translate("NameEvaluator", "checkboxContainer"))
@@ -754,7 +753,6 @@ class Ui_NameEvaluator(object):
         self.text_names.setStatusTip(_translate("NameEvaluator", "Enter all names to be checked against here"))
         self.btn_check_names.setStatusTip(_translate("NameEvaluator", "Commit and run names against all selected avoids"))
         self.btn_check_names.setText(_translate("NameEvaluator", "Check Names"))
-        self.btn_check_names.setShortcut(_translate("NameEvaluator", "Ctrl+Return"))
         self.btn_upper_case.setStatusTip(_translate("NameEvaluator", "Set all names to uppercase"))
         self.btn_upper_case.setText(_translate("NameEvaluator", "ABC"))
         self.btn_title_case.setStatusTip(_translate("NameEvaluator", "Set all names to title case"))

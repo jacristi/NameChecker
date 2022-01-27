@@ -6,7 +6,7 @@ from PyQt5 import QtCore, QtWidgets, QtGui
 from PyQt5.QtWidgets import QApplication, QMainWindow, QMessageBox, QErrorMessage
 
 import src.utils.constants as c
-from src.UI import ui_namechecker
+from src.UI.ui_namechecker import Ui_NameEvaluator
 from src.utils.data_models import QTPandasModel, UserError
 from src.utils.check_names import check_names_for_avoids
 from src.utils.common_utils import Logger, error_handler
@@ -21,9 +21,9 @@ class UIMain(QMainWindow):
     results_df = None
     checked_categories = {}
 
-    def __init__(self):
+    def __init__(self, no_style=True):
         super(UIMain, self).__init__()
-        self.ui = ui_namechecker.Ui_NameEvaluator()
+        self.ui = Ui_NameEvaluator()
         self.ui.setupUi(self)
         self.setWindowIcon(QtGui.QIcon('app.ico'))
 
@@ -56,6 +56,13 @@ class UIMain(QMainWindow):
         self.clickable(self.ui.group_competitor).connect(self.click_group_competitor)
         self.clickable(self.ui.group_project_avoids).connect(self.click_group_project_avoids)
 
+        self.ui.text_names.setTabChangesFocus(True)
+        self.ui.text_project_avoids.setTabChangesFocus(True)
+        self.ui.text_competitor.setTabChangesFocus(True)
+
+        if no_style is True:
+            self.ui.MainWindow.setStyleSheet("")
+            self.ui.MainTab.setStyleSheet("")
 
     @error_handler
     def set_avoids_table_data(self, upd_df=None):
@@ -113,8 +120,11 @@ class UIMain(QMainWindow):
         self.read_checkboxes()
         self.ui.qtable_results.reset()
 
-        if self.names_list == ['']:
+        if self.names_list == []:
             raise UserError("No names entered!")
+
+        if all([i is False for i in self.checked_categories.values()]):
+            raise UserError("No avoids checked!")
 
         self.results_df = check_names_for_avoids(
             self.names_list,
@@ -262,20 +272,25 @@ class UIMain(QMainWindow):
     def click_group_project_avoids(self):
         self.ui.checkbox_project.setChecked(not self.ui.checkbox_project.isChecked())
 
-    def close_app(self):
+    def closeEvent(self, event):
         choice = QMessageBox.question(self, "Quit", "Leave?", QMessageBox.Yes | QMessageBox.No)
 
         if choice == QMessageBox.Yes :
-            sys.exit()
+            QMainWindow.closeEvent(self, event)
         else :
-            pass
+            event.ignore()
+
+    def close_app(self):
+        self.close()
 
 
 @error_handler
 def run():
     app = QApplication(sys.argv)
 
-    NameChecker = UIMain()
+    no_style = False#True
+
+    NameChecker = UIMain(no_style)
     NameChecker.show()
 
     sys.exit(app.exec_())

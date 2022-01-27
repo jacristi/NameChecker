@@ -70,7 +70,7 @@ def check_string_compare_combo(name, avoid):
 
 def check_string_compare_n_letters(name, avoid, n):
     """ """
-    return any(name.lower()[i:i+n] in avoid.lower() for i in range(len(name)-n))
+    return any(name.lower()[i:i+n] in avoid.lower() for i in range(len(name)-(n-1)))
 
 
 TYPE_CHECK_FUNCS = {

@@ -1,4 +1,6 @@
 import configparser
+from os import path
+
 import pandas as pd
 import numpy as np
 
@@ -9,13 +11,17 @@ from src.utils.common_utils import error_handler
 @error_handler
 def get_avoids_from_file(logger, config):
     """ """
-    print("RUNNING FUNC")
+
     file_path = config.get('PATH_TO_AVOIDS_FILE', 'asdasf.xlsx')
 
     consol_df = None
 
     for s_name in (c.INN, c.LINGUISTIC, c.MARKET_RESEARCH):
-        df = pd.read_excel(file_path, sheet_name=s_name)
+        try:
+            df = pd.read_excel(file_path, sheet_name=s_name)
+        except FileNotFoundError as e:
+            return None
+
         df['category'] = s_name
 
         if consol_df is None:
@@ -70,7 +76,7 @@ def parse_project_competitor_avoids(project_avoids_text, competitor_avoids_text)
         c.COMPETITOR
     )
 
-    avoids_df['description'] = ''
+    avoids_df['description'] = 'User Defined Avoid'
 
     for i in c.FIX_SIGNIFIERS + c.ANYWHERE_SIGNIFIERS:
         avoids_df['value'] = avoids_df['value'].str.replace(i, '', regex=False)
@@ -95,6 +101,9 @@ def save_project_competitor_to_file(config, project_avoids_text, competitor_avoi
 def read_project_competitor_from_file(config):
     """ """
     avoid_file_path = config.get('PATH_TO_PROJECT_AVOIDS', 'proj_comp_avoids.txt')
+
+    if not path.exists(avoid_file_path):
+        return
 
     conf = configparser.ConfigParser()
     conf.read(avoid_file_path)

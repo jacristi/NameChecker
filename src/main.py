@@ -47,6 +47,7 @@ class UIMain(QMainWindow):
         self.set_avoids_table_data()
 
         self.set_project_competitor_avoids_from_file()
+        self.save_project_competitor_avoids(None)
 
         self.clickable(self.ui.group_check_uncheck_all).connect(self.click_group_check_uncheck_all)
         self.clickable(self.ui.group_inn).connect(self.click_group_inn)
@@ -55,12 +56,16 @@ class UIMain(QMainWindow):
         self.clickable(self.ui.group_competitor).connect(self.click_group_competitor)
         self.clickable(self.ui.group_project_avoids).connect(self.click_group_project_avoids)
 
+
     @error_handler
     def set_avoids_table_data(self, upd_df=None):
         if upd_df is None:
             self.avoids_df = get_avoids_from_file(self.logger, self.config)
         else:
             self.avoids_df = pd.concat([self.avoids_df, upd_df])
+
+        if self.avoids_df is None:
+            raise UserError("Master avoids file could not be found/read\nPlease check the path defined in config.ini")
 
         self.avoids_df.drop_duplicates(subset=['value', 'type', 'category'], inplace=True)
 
@@ -70,6 +75,8 @@ class UIMain(QMainWindow):
         header.setSectionResizeMode(2, QtWidgets.QHeaderView.Stretch)
 
         self.ui.qtable_avoids.setSortingEnabled(True)
+        self.ui.qtable_avoids.sortByColumn(0, QtCore.Qt.AscendingOrder)
+
 
     @error_handler
     def set_results_table_data(self):
@@ -89,11 +96,13 @@ class UIMain(QMainWindow):
         header.setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
 
 
+
     @error_handler
     def get_and_strip_names(self):
         """ """
         names_list_text = self.ui.text_names.toPlainText()
         self.names_list = sorted(list({i.strip() for i in names_list_text.split('\n') if i.strip()}))
+
 
     @error_handler
     def check_names(self, val):
@@ -102,6 +111,7 @@ class UIMain(QMainWindow):
         self.get_and_strip_names()
         self.read_stem_ignores()
         self.read_checkboxes()
+        self.ui.qtable_results.reset()
 
         if self.names_list == ['']:
             raise UserError("No names entered!")
@@ -281,18 +291,19 @@ if __name__ == '__main__':
 ### XXX re-output names according to case button click (upper, title, lower)
 ### XXX save project avoids to in mem avoids df and show in avoids table
 ### XXX save project/competitor avoids to file to persist across sessions
-### TODO check names against each string according to position type (save as csv or txt?)
+### XXX check names against each string according to position type (save as csv or txt?)
             # XXX prefix `startswith`
             # XXX infix `in` [1:-1]
             # XXX suffix `endswith`
             # XXX anywhere `in`
-            # TODO string comparison - consult original logic
+            # XXX string comparison - consult original logic
 ### XXX show hits in results table
 ### Show results with avoid string highlighted in name?
 ### XXX avoids table sortable
 ### XXX avoids table searchable
 
-### TODO incorporate LBB logo and style guide
+### TODO improve styling
+### TODO Auto-import pre-saved avoids
 ### TODO update all item tooltips
 ### TODO keyboard short-cuts (ctrl+enter when text_names is focus will check names; tab in project avoids text will move to competitor text)
 ### TODO improved avodis table sort functionality ("waterfall sort")

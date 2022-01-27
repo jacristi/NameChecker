@@ -9,8 +9,8 @@ import src.utils.constants as c
 
 
 def setup_base_results_df(names_list, checked_avoid_categories):
-    results_df = pd.DataFrame.from_dict({'name':[]})
-    # results_df['name'] = names_list
+    results_df = pd.DataFrame.from_dict({'Name':[]})
+    # results_df['Name'] = names_list
 
     for cat in checked_avoid_categories:
         results_df[cat] = ''
@@ -30,7 +30,7 @@ def check_names_for_avoids(names_list, ignore_list, avoids_df, checked_avoids):
         results_df = check_name_against_avoids(name, filtered_avoids_df, ignore_list, results_df)
 
     cat_cols = list(results_df.columns)
-    cat_cols.remove('name')
+    cat_cols.remove('Name')
 
     results_df = results_df.replace('', np.NaN).dropna(subset=cat_cols, how='all')
     results_df = results_df.dropna(axis=1, how='all')
@@ -119,7 +119,7 @@ def check_name_against_avoidsx(name, avoids_df, ignore_list, results_df):
             # Add new or append value to appropriate name + category cell
             if val_str is not None:
                 results_df[row['category']] = np.where(
-                    results_df['name'] == name,
+                    results_df['Name'] == name,
                     np.where(
                         results_df[cat] == '',
                         val_str,
@@ -140,11 +140,11 @@ def check_name_against_avoids(name, avoids_df, ignore_list, results_df):
     avoids_df['hit'] = [TYPE_CHECK_FUNCS[t](name, v) for v, t in zip(avoids_df['value'], avoids_df['type'])]
 
     res_df = avoids_df[avoids_df['hit'] == True]
-    res_df['name'] = name
+    res_df['Name'] = name
     piv = pd.pivot_table(res_df, values=['value', 'type'], columns='category', aggfunc=lambda x: ','.join(x))
 
     df_dict = {
-        'name': [name]
+        'Name': [name]
     }
 
     for cat in list(piv.columns):
@@ -241,4 +241,30 @@ graceful
 modern
 hour
 laugh
+park
+home
+spare
+hammer
+drunk
+teeth
+respect
+reach
+glass
+songs
+neat
+promise
+sparkle
+object
+trot
+secretary
+quaint
+view
+advice
+natural
+supreme
+phobic
+fork
+label
+soap
+symptomatic
 """

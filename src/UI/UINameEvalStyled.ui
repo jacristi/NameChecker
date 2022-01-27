@@ -125,9 +125,6 @@ background-color: #55565A;
         <kerning>false</kerning>
        </font>
       </property>
-      <property name="mouseTracking">
-       <bool>false</bool>
-      </property>
       <property name="styleSheet">
        <string notr="true">QWidget{
 background-color:#006B3F;
@@ -234,7 +231,27 @@ color:white;
 QCheckbox{
 border: None;
 background-color: None;
-}</string>
+}
+QScrollBar:vertical {
+background:#9BB7D3;
+}
+QScrollBar:handle{
+background:#4F748B;
+}
+QScrollBar:pressed{
+background:#A9A8A9;
+}
+QScrollBar::add-line:vertical {
+height: 0px;
+}
+QScrollBar::sub-line:vertical {
+height: 0px;
+}
+QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
+height: 0px;
+}
+
+</string>
       </property>
       <property name="tabPosition">
        <enum>QTabWidget::North</enum>
@@ -833,6 +850,9 @@ background-color: None;
               </property>
               <property name="frameShadow">
                <enum>QFrame::Plain</enum>
+              </property>
+              <property name="verticalScrollBarPolicy">
+               <enum>Qt::ScrollBarAsNeeded</enum>
               </property>
               <property name="editTriggers">
                <set>QAbstractItemView::NoEditTriggers</set>

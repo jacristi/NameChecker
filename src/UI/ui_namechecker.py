@@ -119,7 +119,6 @@ class Ui_NameEvaluator(object):
         font.setWeight(50)
         font.setKerning(False)
         self.MainTab.setFont(font)
-        self.MainTab.setMouseTracking(False)
         self.MainTab.setStyleSheet("QWidget{\n"
 "background-color:#006B3F;\n"
 "}\n"
@@ -225,7 +224,27 @@ class Ui_NameEvaluator(object):
 "QCheckbox{\n"
 "border: None;\n"
 "background-color: None;\n"
-"}")
+"}\n"
+"QScrollBar:vertical {\n"
+"background:#9BB7D3;\n"
+"}\n"
+"QScrollBar:handle{\n"
+"background:#4F748B;\n"
+"}\n"
+"QScrollBar:pressed{\n"
+"background:#A9A8A9;\n"
+"}\n"
+"QScrollBar::add-line:vertical {\n"
+"height: 0px;\n"
+"}\n"
+"QScrollBar::sub-line:vertical {\n"
+"height: 0px;\n"
+"}\n"
+"QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {\n"
+"height: 0px;\n"
+"}\n"
+"\n"
+"")
         self.MainTab.setTabPosition(QtWidgets.QTabWidget.North)
         self.MainTab.setObjectName("MainTab")
         self.main_tab = QtWidgets.QWidget()
@@ -487,6 +506,7 @@ class Ui_NameEvaluator(object):
         self.qtable_results = QtWidgets.QTableView(self.main_tab)
         self.qtable_results.setStyleSheet("")
         self.qtable_results.setFrameShadow(QtWidgets.QFrame.Plain)
+        self.qtable_results.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAsNeeded)
         self.qtable_results.setEditTriggers(QtWidgets.QAbstractItemView.NoEditTriggers)
         self.qtable_results.setObjectName("qtable_results")
         self.qtable_results.verticalHeader().setCascadingSectionResizes(True)

@@ -47,7 +47,7 @@ class UIMain(QMainWindow):
         self.set_avoids_table_data()
 
         self.set_project_competitor_avoids_from_file()
-        self.save_project_competitor_avoids(None)
+        self.save_project_competitor_avoids_start()
 
         self.clickable(self.ui.group_check_uncheck_all).connect(self.click_group_check_uncheck_all)
         self.clickable(self.ui.group_inn).connect(self.click_group_inn)
@@ -72,9 +72,9 @@ class UIMain(QMainWindow):
             self.avoids_df = pd.concat([self.avoids_df, upd_df])
 
         if self.avoids_df is None:
-            raise UserError("Master avoids file could not be found/read\nPlease check the path defined in config.ini")
+            raise UserError("Master avoids file could not be found/read\nPlease check the path defined in NameEvaluator_conf.ini")
 
-        self.avoids_df.drop_duplicates(subset=['value', 'type', 'category'], inplace=True)
+        self.avoids_df.drop_duplicates(subset=[c.VALUE_FIELD, c.TYPE_FIELD, c.CATEGORY_FIELD], inplace=True)
 
         self.ui.qtable_avoids.setModel(QTPandasModel(self.avoids_df))
 
@@ -202,12 +202,28 @@ class UIMain(QMainWindow):
 
 
     @error_handler
-    def save_project_competitor_avoids(self, val):
+    def save_project_competitor_avoids_start(self):
         """ """
         project_avoids_text = self.ui.text_project_avoids.toPlainText()
         competitor_avoids_text = self.ui.text_competitor.toPlainText()
 
         if project_avoids_text == '' and competitor_avoids_text == '':
+            return
+
+        save_project_competitor_to_file(self.config, project_avoids_text, competitor_avoids_text)
+
+        addtl_avoids_df = parse_project_competitor_avoids(project_avoids_text, competitor_avoids_text)
+
+        self.set_avoids_table_data(addtl_avoids_df)
+
+
+    @error_handler
+    def save_project_competitor_avoids(self, val):
+        """ """
+        project_avoids_text = self.ui.text_project_avoids.toPlainText()
+        competitor_avoids_text = self.ui.text_competitor.toPlainText()
+
+        if project_avoids_text == '' and competitor_avoids_text:
             raise UserError("No avoids to save!")
 
         save_project_competitor_to_file(self.config, project_avoids_text, competitor_avoids_text)

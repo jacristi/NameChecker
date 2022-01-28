@@ -107,6 +107,7 @@ celerybeat.pid
 
 # Config
 config.ini
+NameEvaluator_conf.ini
 
 # Environments
 .env

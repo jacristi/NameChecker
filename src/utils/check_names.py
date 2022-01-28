@@ -9,8 +9,8 @@ import src.utils.constants as c
 
 
 def setup_base_results_df(names_list, checked_avoid_categories):
-    results_df = pd.DataFrame.from_dict({'Name':[]})
-    # results_df['Name'] = names_list
+    results_df = pd.DataFrame.from_dict({c.NAME_FIELD:[]})
+    # results_df[c.NAME_FIELD] = names_list
 
     for cat in checked_avoid_categories:
         results_df[cat] = ''
@@ -24,13 +24,13 @@ def check_names_for_avoids(names_list, ignore_list, avoids_df, checked_avoids):
 
     results_df = setup_base_results_df(names_list, checked_avoid_categories)
 
-    filtered_avoids_df = avoids_df[avoids_df['category'].isin(checked_avoid_categories)]
+    filtered_avoids_df = avoids_df[avoids_df[c.CATEGORY_FIELD].isin(checked_avoid_categories)]
 
     for name in names_list:
         results_df = check_name_against_avoids(name, filtered_avoids_df, ignore_list, results_df)
 
     cat_cols = list(results_df.columns)
-    cat_cols.remove('Name')
+    cat_cols.remove(c.NAME_FIELD)
 
     results_df = results_df.replace('', np.NaN).dropna(subset=cat_cols, how='all')
     results_df = results_df.dropna(axis=1, how='all')
@@ -85,19 +85,19 @@ TYPE_CHECK_FUNCS = {
 def check_name_against_avoidsx(name, avoids_df, ignore_list, results_df):
     """ """
 
-    avoid_types = set(avoids_df['type'])
+    avoid_types = set(avoids_df[c.TYPE_FIELD])
 
     for t in avoid_types:
         ### Filter avoids by type
-        t_df = avoids_df[avoids_df['type'] == t]
+        t_df = avoids_df[avoids_df[c.TYPE_FIELD] == t]
 
         ### Get the type function(s) to check (e.g. check_prefix for type == 'prefix')
         check_func = TYPE_CHECK_FUNCS[t]
 
         ### iter over rows
-        for ind, row in t_df[['value', 'category']].drop_duplicates().iterrows():
-            val = row['value']
-            cat = row['category']
+        for ind, row in t_df[[c.VALUE_FIELD, c.CATEGORY_FIELD]].drop_duplicates().iterrows():
+            val = row[c.VALUE_FIELD]
+            cat = row[c.CATEGORY_FIELD]
             val_str = None
 
             if any([val in ignore for ignore in ignore_list]):
@@ -118,8 +118,8 @@ def check_name_against_avoidsx(name, avoids_df, ignore_list, results_df):
 
             # Add new or append value to appropriate name + category cell
             if val_str is not None:
-                results_df[row['category']] = np.where(
-                    results_df['Name'] == name,
+                results_df[row[c.CATEGORY_FIELD]] = np.where(
+                    results_df[c.NAME_FIELD] == name,
                     np.where(
                         results_df[cat] == '',
                         val_str,
@@ -132,19 +132,22 @@ def check_name_against_avoidsx(name, avoids_df, ignore_list, results_df):
 
 def check_name_against_avoids(name, avoids_df, ignore_list, results_df):
     """ """
-    avoids_df = avoids_df[~avoids_df['value'].isin(ignore_list)].drop_duplicates()
+    df = avoids_df.copy()
 
-    sc_avoids_df = avoids_df[avoids_df['type'] == c.STRING_COMPARE]
-    avoids_df = avoids_df[avoids_df['type'] != c.STRING_COMPARE]
+    ignore_mask = [not any(a in i for i in ignore_list) for a in avoids_df[c.VALUE_FIELD]]
+    avoids_df = avoids_df[ignore_mask].drop_duplicates()
 
-    avoids_df['hit'] = [TYPE_CHECK_FUNCS[t](name, v) for v, t in zip(avoids_df['value'], avoids_df['type'])]
+    sc_avoids_df = avoids_df[avoids_df[c.TYPE_FIELD] == c.STRING_COMPARE]
+    avoids_df = avoids_df[avoids_df[c.TYPE_FIELD] != c.STRING_COMPARE]
+
+    avoids_df['hit'] = [TYPE_CHECK_FUNCS[t](name, v) for v, t in zip(avoids_df[c.VALUE_FIELD], avoids_df[c.TYPE_FIELD])]
 
     res_df = avoids_df[avoids_df['hit'] == True]
-    res_df['Name'] = name
-    piv = pd.pivot_table(res_df, values=['value', 'type'], columns='category', aggfunc=lambda x: ','.join(x))
+    res_df[c.NAME_FIELD] = name
+    piv = pd.pivot_table(res_df, values=[c.VALUE_FIELD, c.TYPE_FIELD], columns=c.CATEGORY_FIELD, aggfunc=lambda x: ','.join(x))
 
     df_dict = {
-        'Name': [name]
+        c.NAME_FIELD: [name]
     }
 
     for cat in list(piv.columns):
@@ -154,9 +157,9 @@ def check_name_against_avoids(name, avoids_df, ignore_list, results_df):
         df_dict[cat] = ['\n'.join([' '.join(i) for i in z])]
 
     if not sc_avoids_df.empty:
-        for ind, row in sc_avoids_df[['value', 'category']].iterrows():
-            val = row['value']
-            cat = row['category']
+        for ind, row in sc_avoids_df[[c.VALUE_FIELD, c.CATEGORY_FIELD]].iterrows():
+            val = row[c.VALUE_FIELD]
+            cat = row[c.CATEGORY_FIELD]
             val_str = None
 
             ### String comparison checks are not as simple :/

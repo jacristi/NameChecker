@@ -41,6 +41,8 @@ class UIMain(QMainWindow):
         self.ui.btn_save_avoids.clicked.connect(self.save_project_competitor_avoids)
         self.ui.btn_reload_avoids.clicked.connect(self.reload_avoids)
         self.ui.btn_exit.clicked.connect(self.close_app)
+        self.ui.btn_filter_avoids.clicked.connect(self.filter_avoids_table)
+        self.ui.btn_clear_avoid_filter.clicked.connect(self.clear_avoids_table_filter)
 
         self.ui.checkbox_all.stateChanged.connect(self.check_uncheck_all)
 
@@ -83,6 +85,43 @@ class UIMain(QMainWindow):
 
         self.ui.qtable_avoids.setSortingEnabled(True)
         self.ui.qtable_avoids.sortByColumn(0, QtCore.Qt.AscendingOrder)
+
+
+    @error_handler
+    def set_filtered_avoids_table_data(self, filtered_df):
+        self.ui.qtable_avoids.setModel(QTPandasModel(filtered_df))
+
+        header = self.ui.qtable_avoids.horizontalHeader()
+        header.setSectionResizeMode(2, QtWidgets.QHeaderView.Stretch)
+
+        self.ui.qtable_avoids.setSortingEnabled(True)
+        self.ui.qtable_avoids.sortByColumn(0, QtCore.Qt.AscendingOrder)
+
+
+    @error_handler
+    def filter_avoids_table(self, val):
+        """ """
+        temp_table = self.avoids_df.copy()
+        filter_text = self.ui.lineedit_filter_avoids.text()
+
+        if self.config.get('FILTER_AVOIDS_ON_VALUE_ONLY', '0') == '1':
+            temp_table = temp_table[temp_table[c.VALUE_FIELD].str.contains(filter_text)]
+        else:
+            temp_table = temp_table[
+                (temp_table[c.VALUE_FIELD].str.contains(filter_text)) |
+                (temp_table[c.TYPE_FIELD].str.contains(filter_text)) |
+                (temp_table[c.DESCRIPTION_FIELD].str.contains(filter_text)) |
+                (temp_table[c.CATEGORY_FIELD].str.contains(filter_text))
+                ]
+
+        self.set_filtered_avoids_table_data(temp_table)
+
+
+
+    @error_handler
+    def clear_avoids_table_filter(self, val):
+        """ """
+        self.set_avoids_table_data()
 
 
     @error_handler

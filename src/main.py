@@ -323,7 +323,10 @@ class UIMain(QMainWindow):
         self.ui.checkbox_project.setChecked(not self.ui.checkbox_project.isChecked())
 
     def closeEvent(self, event):
-        choice = QMessageBox.question(self, "Quit", "Leave?", QMessageBox.Yes | QMessageBox.No)
+        if self.config.get('confirm_exit', '1') == '0':
+            choice = QMessageBox.Yes
+        else:
+            choice = QMessageBox.question(self, "Quit", "Leave?", QMessageBox.Yes | QMessageBox.No)
 
         if choice == QMessageBox.Yes :
             QMainWindow.closeEvent(self, event)

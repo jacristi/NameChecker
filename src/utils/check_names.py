@@ -7,7 +7,6 @@ from src.utils.common_utils import error_handler
 import src.utils.constants as c
 
 
-
 def setup_base_results_df(names_list, checked_avoid_categories):
     results_df = pd.DataFrame.from_dict({c.NAME_FIELD:[]})
     # results_df[c.NAME_FIELD] = names_list
@@ -16,6 +15,7 @@ def setup_base_results_df(names_list, checked_avoid_categories):
         results_df[cat] = ''
 
     return results_df
+
 
 @error_handler
 def check_names_for_avoids(names_list, ignore_list, avoids_df, checked_avoids):
@@ -70,7 +70,11 @@ def check_string_compare_combo(name, avoid):
 
 def check_string_compare_n_letters(name, avoid, n):
     """ """
-    return any(name.lower()[i:i+n] in avoid.lower() for i in range(len(name)-(n-1)))
+    for i in range(len(name)-(n-1)):
+        if name.lower()[i:i+n] in avoid.lower():
+            return name.lower()[i:i+n]
+    else:
+        return None
 
 
 TYPE_CHECK_FUNCS = {
@@ -81,53 +85,6 @@ TYPE_CHECK_FUNCS = {
     c.STRING_COMPARE:       partial(check_string_compare_n_letters, n=4),
     c.STRING_COMPARE_COMBO: check_string_compare_combo,
 }
-
-def check_name_against_avoidsx(name, avoids_df, ignore_list, results_df):
-    """ """
-
-    avoid_types = set(avoids_df[c.TYPE_FIELD])
-
-    for t in avoid_types:
-        ### Filter avoids by type
-        t_df = avoids_df[avoids_df[c.TYPE_FIELD] == t]
-
-        ### Get the type function(s) to check (e.g. check_prefix for type == 'prefix')
-        check_func = TYPE_CHECK_FUNCS[t]
-
-        ### iter over rows
-        for ind, row in t_df[[c.VALUE_FIELD, c.CATEGORY_FIELD]].drop_duplicates().iterrows():
-            val = row[c.VALUE_FIELD]
-            cat = row[c.CATEGORY_FIELD]
-            val_str = None
-
-            if any([val in ignore for ignore in ignore_list]):
-                continue
-
-            if t == c.STRING_COMPARE:
-                if check_string_compare_combo(name, val):
-                    val_str = f'{val} (combo)'
-                else:
-                    for l in range(len(name), 3, -1):
-                        if check_string_compare_n_letters(name, val, l):
-                            val_str = f'{val} ({l} letter string)'
-                            break
-
-            elif check_func(name, val):
-                ### Get category and value (type)
-                val_str = f'{val} ({t})'
-
-            # Add new or append value to appropriate name + category cell
-            if val_str is not None:
-                results_df[row[c.CATEGORY_FIELD]] = np.where(
-                    results_df[c.NAME_FIELD] == name,
-                    np.where(
-                        results_df[cat] == '',
-                        val_str,
-                        results_df[cat] + '\n' + val_str),
-                    results_df[cat]
-                )
-
-    return results_df
 
 
 def check_name_against_avoids(name, avoids_df, ignore_list, results_df):
@@ -166,12 +123,14 @@ def check_name_against_avoids(name, avoids_df, ignore_list, results_df):
             if check_string_compare(name, val):
                 val_str = f'{val} (string match)'
             elif check_string_compare_combo(name, val):
-                val_str = f'{val} (combo)'
+                val_str = f'{val} ({name[0]}--{name[-3:]})'
             else:
                 for l in range(len(name), c.STRING_COMPARE_MINIMUM-1, -1):
-                    if check_string_compare_n_letters(name, val, l):
-                        val_str = f'{val} ({l} letter similar)'
+                    ret = check_string_compare_n_letters(name, val, l)
+                    if ret is not None:
+                        val_str = f'{val} (*{ret}*)'
                         break
+
             if val_str is not None:
                 try:
                     new_val = f'{df_dict[cat]}\n{val_str}'

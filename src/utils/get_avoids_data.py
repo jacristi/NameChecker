@@ -32,6 +32,9 @@ def get_avoids_from_file(logger, config):
 
     consol_df = consol_df[~consol_df[c.TYPE_FIELD].isnull()]
     consol_df[c.DESCRIPTION_FIELD] = consol_df[c.DESCRIPTION_FIELD].fillna('')
+
+    consol_df = consol_df[[c.VALUE_FIELD, c.TYPE_FIELD, c.DESCRIPTION_FIELD, c.CATEGORY_FIELD]]
+
     return consol_df
 
 

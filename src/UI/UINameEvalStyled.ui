@@ -257,7 +257,7 @@ height: 0px;
        <enum>QTabWidget::North</enum>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="main_tab">
        <property name="styleSheet">
@@ -504,7 +504,7 @@ height: 0px;
                   <string/>
                  </property>
                  <property name="statusTip">
-                  <string>Check against project specific avoids</string>
+                  <string>Check against linguistic avoids</string>
                  </property>
                  <property name="styleSheet">
                   <string notr="true"/>
@@ -740,7 +740,7 @@ height: 0px;
                  </font>
                 </property>
                 <property name="statusTip">
-                 <string>Commit and run names against all selected avoids</string>
+                 <string>Commit and run names against all selected avoids [Ctrl+ Enter]</string>
                 </property>
                 <property name="styleSheet">
                  <string notr="true"/>
@@ -863,6 +863,9 @@ height: 0px;
               <property name="editTriggers">
                <set>QAbstractItemView::NoEditTriggers</set>
               </property>
+              <property name="sortingEnabled">
+               <bool>true</bool>
+              </property>
               <attribute name="verticalHeaderCascadingSectionResizes">
                <bool>true</bool>
               </attribute>
@@ -926,7 +929,7 @@ height: 0px;
              </font>
             </property>
             <property name="statusTip">
-             <string>Exit Name Checker</string>
+             <string>Exit the application</string>
             </property>
             <property name="styleSheet">
              <string notr="true">:hover{
@@ -994,6 +997,9 @@ font-weight:bold;
             </property>
             <item row="1" column="3">
              <widget class="QTableView" name="qtable_avoids">
+              <property name="statusTip">
+               <string>Complete list of all avoids</string>
+              </property>
               <property name="editTriggers">
                <set>QAbstractItemView::NoEditTriggers</set>
               </property>
@@ -1009,6 +1015,9 @@ font-weight:bold;
              <layout class="QGridLayout" name="gridLayout_7">
               <item row="0" column="0" alignment="Qt::AlignHCenter">
                <widget class="QPushButton" name="btn_reload_avoids">
+                <property name="statusTip">
+                 <string>Reload avoids from master list only</string>
+                </property>
                 <property name="text">
                  <string>Reload Avoids</string>
                 </property>
@@ -1038,6 +1047,9 @@ font-weight:bold;
                   <height>16777215</height>
                  </size>
                 </property>
+                <property name="statusTip">
+                 <string>Activate specified filter</string>
+                </property>
                 <property name="text">
                  <string>Search</string>
                 </property>
@@ -1045,6 +1057,9 @@ font-weight:bold;
               </item>
               <item>
                <widget class="QLineEdit" name="lineedit_filter_avoids">
+                <property name="statusTip">
+                 <string>Enter avoids to filter for here</string>
+                </property>
                 <property name="inputMask">
                  <string/>
                 </property>
@@ -1075,6 +1090,9 @@ font-weight:bold;
                   <width>75</width>
                   <height>16777215</height>
                  </size>
+                </property>
+                <property name="statusTip">
+                 <string>Clear specified filter</string>
                 </property>
                 <property name="text">
                  <string>Clear Filter</string>
@@ -1158,8 +1176,14 @@ font-weight:bold;
                   <height>16777215</height>
                  </size>
                 </property>
+                <property name="statusTip">
+                 <string>Save and combine avoids with master list [Ctrl+Enter]</string>
+                </property>
                 <property name="text">
                  <string>Save Avoids</string>
+                </property>
+                <property name="shortcut">
+                 <string>Ctrl+Return</string>
                 </property>
                </widget>
               </item>
@@ -1175,6 +1199,9 @@ font-weight:bold;
                   <height>16777215</height>
                  </size>
                 </property>
+                <property name="statusTip">
+                 <string>Enter project avoids here</string>
+                </property>
                </widget>
               </item>
               <item>
@@ -1185,7 +1212,11 @@ font-weight:bold;
                </widget>
               </item>
               <item>
-               <widget class="QPlainTextEdit" name="text_competitor"/>
+               <widget class="QPlainTextEdit" name="text_competitor">
+                <property name="statusTip">
+                 <string>Enter competitor names here</string>
+                </property>
+               </widget>
               </item>
              </layout>
             </item>

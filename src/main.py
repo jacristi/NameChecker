@@ -223,7 +223,7 @@ class UIMain(QMainWindow):
         project_avoids_text = self.ui.text_project_avoids.toPlainText()
         competitor_avoids_text = self.ui.text_competitor.toPlainText()
 
-        if project_avoids_text == '' and competitor_avoids_text:
+        if project_avoids_text == '' and competitor_avoids_text == '':
             raise UserError("No avoids to save!")
 
         save_project_competitor_to_file(self.config, project_avoids_text, competitor_avoids_text)
@@ -304,7 +304,7 @@ class UIMain(QMainWindow):
 def run():
     app = QApplication(sys.argv)
 
-    no_style = False#True
+    no_style = False
 
     NameChecker = UIMain(no_style)
     NameChecker.show()
@@ -329,13 +329,12 @@ if __name__ == '__main__':
             # XXX anywhere `in`
             # XXX string comparison - consult original logic
 ### XXX show hits in results table
-### Show results with avoid string highlighted in name?
-### XXX avoids table sortable
-### XXX avoids table searchable
+### XXX show hit string for combo/string compare {{potentially highlight string in hit}}
+### XXX results sortable
+### XXX Auto-import pre-saved avoids
 
-### TODO improve styling
-### TODO Auto-import pre-saved avoids
+
+
+### TODO avoids table searchable/filterable
 ### TODO update all item tooltips
 ### TODO keyboard short-cuts (ctrl+enter when text_names is focus will check names; tab in project avoids text will move to competitor text)
-### TODO improved avodis table sort functionality ("waterfall sort")
-### TODO better scrollbars

@@ -4,20 +4,19 @@ from PyQt5.QtCore import Qt, QAbstractTableModel
 
 
 class QTPandasModel(QAbstractTableModel):
-    """ """
+    """ Set up a pandas data model for diplaying/interacting with a pandas dataframe in qtableview. """
 
     def __init__(self, data, parent=None):
-        """ """
         QAbstractTableModel.__init__(self, parent)
         self._data = data
         self._columns = data.columns
 
     def rowCount(self, parent=None):
-        """ """
+        """ Returns row count of data. """
         return self._data.shape[0]
 
     def columnCount(self, parent=None):
-        """ """
+        """ Returns column count of data. """
         return self._data.shape[1]
 
     def data(self, index, role=Qt.DisplayRole):
@@ -38,14 +37,12 @@ class QTPandasModel(QAbstractTableModel):
         return Qt.ItemIsSelectable|Qt.ItemIsEnabled|Qt.ItemIsEditable
 
     def setData(self, index, value, role):
+        """ Get/Set edited cell data. """
         if role == Qt.EditRole:
             cur_val = self._data.iloc[index.row(),index.column()]
             print(f'Changing {cur_val} to {value} at row: {index.row()}, column: {index.column()}')
             self._data.iloc[index.row(),index.column()] = value
             return True
-
-    def insertRow(self, row, parent):
-        return super().insertRow(row, parent=parent)
 
     def sort(self, Ncol, order):
         """ """
@@ -59,4 +56,4 @@ class QTPandasModel(QAbstractTableModel):
 
 
 class UserError(Exception):
-    """ """
+    """ Error to raise when a user triggers an event without certain other requirements satisfied. """

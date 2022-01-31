@@ -41,8 +41,7 @@ class UIMain(QMainWindow):
         self.ui.btn_save_avoids.clicked.connect(self.save_project_competitor_avoids)
         self.ui.btn_reload_avoids.clicked.connect(self.reload_avoids)
         self.ui.btn_exit.clicked.connect(self.close_app)
-        self.ui.btn_filter_avoids.clicked.connect(self.filter_avoids_table)
-        self.ui.btn_clear_avoid_filter.clicked.connect(self.clear_avoids_table_filter)
+        self.ui.lineedit_filter_avoids.textChanged.connect(self.filter_avoids_table)
 
         self.ui.checkbox_all.stateChanged.connect(self.check_uncheck_all)
 
@@ -102,26 +101,22 @@ class UIMain(QMainWindow):
     def filter_avoids_table(self, val):
         """ """
         temp_table = self.avoids_df.copy()
-        filter_text = self.ui.lineedit_filter_avoids.text()
+        filter_text = self.ui.lineedit_filter_avoids.text().strip()
+
+        if filter_text == '':
+            self.set_avoids_table_data()
 
         if self.config.get('FILTER_AVOIDS_ON_VALUE_ONLY', '0') == '1':
             temp_table = temp_table[temp_table[c.VALUE_FIELD].str.contains(filter_text)]
         else:
             temp_table = temp_table[
-                (temp_table[c.VALUE_FIELD].str.contains(filter_text)) |
-                (temp_table[c.TYPE_FIELD].str.contains(filter_text)) |
-                (temp_table[c.DESCRIPTION_FIELD].str.contains(filter_text)) |
-                (temp_table[c.CATEGORY_FIELD].str.contains(filter_text))
+                (temp_table[c.VALUE_FIELD].str.contains(filter_text, case=False)) |
+                (temp_table[c.TYPE_FIELD].str.contains(filter_text, case=False)) |
+                (temp_table[c.DESCRIPTION_FIELD].str.contains(filter_text, case=False)) |
+                (temp_table[c.CATEGORY_FIELD].str.contains(filter_text, case=False))
                 ]
 
         self.set_filtered_avoids_table_data(temp_table)
-
-
-
-    @error_handler
-    def clear_avoids_table_filter(self, val):
-        """ """
-        self.set_avoids_table_data()
 
 
     @error_handler
@@ -371,9 +366,8 @@ if __name__ == '__main__':
 ### XXX show hit string for combo/string compare {{potentially highlight string in hit}}
 ### XXX results sortable
 ### XXX Auto-import pre-saved avoids
+### XXX avoids table searchable/filterable
+### XXX update all item tooltips
 
 
-
-### TODO avoids table searchable/filterable
-### TODO update all item tooltips
 ### TODO keyboard short-cuts (ctrl+enter when text_names is focus will check names; tab in project avoids text will move to competitor text)

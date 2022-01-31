@@ -257,7 +257,7 @@ height: 0px;
        <enum>QTabWidget::North</enum>
       </property>
       <property name="currentIndex">
-       <number>1</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="main_tab">
        <property name="styleSheet">
@@ -1028,34 +1028,6 @@ font-weight:bold;
             <item row="3" column="3">
              <layout class="QHBoxLayout" name="horizontalLayout_11">
               <item>
-               <widget class="QToolButton" name="btn_filter_avoids">
-                <property name="sizePolicy">
-                 <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
-                  <horstretch>0</horstretch>
-                  <verstretch>0</verstretch>
-                 </sizepolicy>
-                </property>
-                <property name="minimumSize">
-                 <size>
-                  <width>25</width>
-                  <height>0</height>
-                 </size>
-                </property>
-                <property name="maximumSize">
-                 <size>
-                  <width>75</width>
-                  <height>16777215</height>
-                 </size>
-                </property>
-                <property name="statusTip">
-                 <string>Activate specified filter</string>
-                </property>
-                <property name="text">
-                 <string>Search</string>
-                </property>
-               </widget>
-              </item>
-              <item>
                <widget class="QLineEdit" name="lineedit_filter_avoids">
                 <property name="statusTip">
                  <string>Enter avoids to filter for here</string>
@@ -1068,34 +1040,6 @@ font-weight:bold;
                 </property>
                 <property name="placeholderText">
                  <string>Filter avoids</string>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QToolButton" name="btn_clear_avoid_filter">
-                <property name="sizePolicy">
-                 <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
-                  <horstretch>0</horstretch>
-                  <verstretch>0</verstretch>
-                 </sizepolicy>
-                </property>
-                <property name="minimumSize">
-                 <size>
-                  <width>25</width>
-                  <height>0</height>
-                 </size>
-                </property>
-                <property name="maximumSize">
-                 <size>
-                  <width>75</width>
-                  <height>16777215</height>
-                 </size>
-                </property>
-                <property name="statusTip">
-                 <string>Clear specified filter</string>
-                </property>
-                <property name="text">
-                 <string>Clear Filter</string>
                 </property>
                </widget>
               </item>

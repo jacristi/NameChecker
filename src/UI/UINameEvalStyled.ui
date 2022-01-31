@@ -1007,7 +1007,7 @@ font-weight:bold;
                <bool>true</bool>
               </property>
               <property name="wordWrap">
-               <bool>false</bool>
+               <bool>true</bool>
               </property>
              </widget>
             </item>

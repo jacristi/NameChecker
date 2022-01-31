@@ -107,7 +107,6 @@ class UIMain(QMainWindow):
         self.ui.qtable_avoids.setSortingEnabled(True)
         self.ui.qtable_avoids.sortByColumn(0, QtCore.Qt.AscendingOrder)
 
-
     @error_handler
     def set_filtered_avoids_table_data(self, filtered_df):
         """ Set qtable_avoids to filtered data. """
@@ -122,7 +121,6 @@ class UIMain(QMainWindow):
         ### Sorting enabled
         self.ui.qtable_avoids.setSortingEnabled(True)
         self.ui.qtable_avoids.sortByColumn(0, QtCore.Qt.AscendingOrder)
-
 
     @error_handler
     def filter_avoids_table(self, val):
@@ -151,7 +149,6 @@ class UIMain(QMainWindow):
         ### Set filtered table
         self.set_filtered_avoids_table_data(filtered_table)
 
-
     @error_handler
     def set_results_table_data(self):
         """ Set qtable_results to have the expected data. """
@@ -175,14 +172,12 @@ class UIMain(QMainWindow):
         rows = self.ui.qtable_results.verticalHeader()
         rows.setSectionResizeMode(QtWidgets.QHeaderView.ResizeToContents)
 
-
     @error_handler
     def get_and_strip_names(self):
         """ Get names entered in text_names text area, split on new line and strip of whitespace. """
 
         names_list_text = self.ui.text_names.toPlainText()
         self.names_list = sorted(list({i.strip() for i in names_list_text.split('\n') if i.strip()}))
-
 
     @error_handler
     def check_names(self, val):
@@ -218,14 +213,12 @@ class UIMain(QMainWindow):
         ### Reset cursor when process is complete
         self.setCursor(QtGui.QCursor(self.default_cursor))
 
-
     @error_handler
     def read_stem_ignores(self):
         """ Get any/all entered stem ignores. These can be commaseparated"""
 
         ignore_list_text = self.ui.lineedit_ignore.text()
         self.ignore_list = [i.strip() for i in ignore_list_text.split(',')]
-
 
     @error_handler
     def check_uncheck_all(self, val):
@@ -236,7 +229,6 @@ class UIMain(QMainWindow):
         self.ui.checkbox_project.setChecked(val)
         self.ui.checkbox_linguistic.setChecked(val)
         self.ui.checkbox_competitor.setChecked(val)
-
 
     @error_handler
     def read_checkboxes(self):
@@ -249,7 +241,6 @@ class UIMain(QMainWindow):
             c.LINGUISTIC:       self.ui.checkbox_linguistic.isChecked(),
             c.COMPETITOR:       self.ui.checkbox_competitor.isChecked(),
         }
-
 
     @property
     def names_list(self):
@@ -267,7 +258,6 @@ class UIMain(QMainWindow):
         self.get_and_strip_names()
         self.names_list = [i.upper() for i in self.names_list]
 
-
     @error_handler
     def set_names_titlecase(self, val):
         """ Set all names to Title case. """
@@ -275,20 +265,17 @@ class UIMain(QMainWindow):
         self.get_and_strip_names()
         self.names_list = [i.title() for i in self.names_list]
 
-
     @error_handler
     def set_names_lowercase(self, val):
         """ Set all names to lower case. """
         self.get_and_strip_names()
         self.names_list = [i.lower() for i in self.names_list]
 
-
     @error_handler
     def reload_avoids(self, val):
         """ Reset avoids table to only contain avoids from master file. """
 
         self.set_avoids_table_data()
-
 
     @error_handler
     def save_project_competitor_avoids_start(self):
@@ -307,7 +294,6 @@ class UIMain(QMainWindow):
         ### Parse avoids and concat to complete avoids df
         addtl_avoids_df = parse_project_competitor_avoids(project_avoids_text, competitor_avoids_text)
         self.set_avoids_table_data(addtl_avoids_df)
-
 
     @error_handler
     def save_project_competitor_avoids(self, val):
@@ -339,7 +325,6 @@ class UIMain(QMainWindow):
         """ Raise error in a dialogue box. """
 
         self.err_dialogue.showMessage(str(err))
-
 
     def raise_critical_error(self, err):
         """ Critical message box for any unexpected errors. """

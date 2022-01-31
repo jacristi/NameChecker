@@ -576,7 +576,7 @@ class Ui_NameEvaluator(object):
         self.qtable_avoids = QtWidgets.QTableView(self.avoids_tab)
         self.qtable_avoids.setEditTriggers(QtWidgets.QAbstractItemView.NoEditTriggers)
         self.qtable_avoids.setSortingEnabled(True)
-        self.qtable_avoids.setWordWrap(False)
+        self.qtable_avoids.setWordWrap(True)
         self.qtable_avoids.setObjectName("qtable_avoids")
         self.gridLayout_6.addWidget(self.qtable_avoids, 1, 3, 1, 1)
         self.gridLayout_7 = QtWidgets.QGridLayout()

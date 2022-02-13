@@ -48,6 +48,7 @@ class UIMain(QMainWindow):
         self.ui.btn_title_case.clicked.connect(self.set_names_titlecase)
         self.ui.btn_lower_case.clicked.connect(self.set_names_lowercase)
         self.ui.btn_save_avoids.clicked.connect(self.save_project_competitor_avoids)
+        self.ui.btn_clear_avoids.clicked.connect(self.clear_avoids)
         self.ui.btn_reload_avoids.clicked.connect(self.reload_avoids)
         self.ui.btn_exit.clicked.connect(self.close_app)
         self.ui.lineedit_filter_avoids.textChanged.connect(self.filter_avoids_table)
@@ -270,6 +271,20 @@ class UIMain(QMainWindow):
         """ Set all names to lower case. """
         self.get_and_strip_names()
         self.names_list = [i.lower() for i in self.names_list]
+
+    @error_handler
+    def clear_avoids(self, val):
+        """ """
+        choice = QMessageBox.question(
+            self, "Clear and reset all avoids", "Clear and reset all avoids?",
+            QMessageBox.Yes | QMessageBox.No)
+
+        if choice == QMessageBox.Yes :
+            self.ui.text_project_avoids.clear()
+            self.ui.text_competitor.clear()
+            save_project_competitor_to_file(self.config, '', '')
+            self.reload_avoids(True)
+
 
     @error_handler
     def reload_avoids(self, val):

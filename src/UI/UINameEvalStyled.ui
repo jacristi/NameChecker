@@ -1112,7 +1112,7 @@ font-weight:bold;
             </item>
             <item row="5" column="0">
              <layout class="QGridLayout" name="gridLayout_8">
-              <item row="0" column="0" alignment="Qt::AlignHCenter|Qt::AlignVCenter">
+              <item row="0" column="0" alignment="Qt::AlignRight|Qt::AlignVCenter">
                <widget class="QPushButton" name="btn_save_avoids">
                 <property name="maximumSize">
                  <size>
@@ -1128,6 +1128,22 @@ font-weight:bold;
                 </property>
                 <property name="shortcut">
                  <string>Ctrl+Return</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="1" alignment="Qt::AlignLeft">
+               <widget class="QPushButton" name="btn_clear_avoids">
+                <property name="maximumSize">
+                 <size>
+                  <width>300</width>
+                  <height>16777215</height>
+                 </size>
+                </property>
+                <property name="statusTip">
+                 <string>Clear and reset avoids</string>
+                </property>
+                <property name="text">
+                 <string>Clear Avoids</string>
                 </property>
                </widget>
               </item>

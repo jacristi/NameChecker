@@ -52,7 +52,24 @@
 ### All Avoids
 * The All Avoids table shows the complete list of all avoids that will be used by the application when evaluating names. This includes values from the master avoids file as well as any user entered-values
 * This table can be filtered quickly by typing in the Filter avoids text line below the table. This filter looks at values in all fields but can be configured to only filter by the "value" field by setting the value "filter_avoids_on_value_only" in the configuration file to 1
+* The "Reload Avoids" button will remove all avoids from the current total list of avoids and reload only the avoids from the master file.
 
+-----
+
+## Maintaining the Master Avoids File
+* The master avoids file contains all avoids for categories "INN - USAN," 'Linguistic," and "Market Research" - each category has its own sheet in the file.
+* The path to the master file can be configured in the NameEvaluator_Conf file with value: `path_to_avoids_file`
+* Each sheet must have at least the fields `value`, `type`, and `description` - these are required for the application to read and parse the avoids.
+    * value: this field is for the actual letter string of the avoid (e.g. vir, mab, or tox)
+    * type: this field defines what type of avoid the value is and how it should be checked against, there are 5 avoid types that can be defined:
+        * prefix: checks for the avoid letter string at the beginning of a name
+        * infix: checks for the avoid letter string between the first and last letter (i.e. first and last letter are not included in the check)
+        * suffix: checks for the avoid letter string at the end of a name
+        * anywhere: checks for the avoid letter string anywhere in the name
+        * string_compare: performs multiple checks on a name:
+            * combo: this checks if the avoid string shares the name first letter and last 3 letters
+            * compare n letters: this checks if the name and avoid letter string share a string of length n, n can be any number between the minimum defined in the config (string_compare_minimum) and the length of the name.
+* Additional field can be added in the avoids master for any of the sheets as desired, and each can be different as long as the above 3 remain consistent across all.
 
 -----
 

@@ -44,7 +44,7 @@ def get_avoids_from_file(logger, config):
 
 
 
-def parse_project_competitor_avoids(project_avoids_text, competitor_avoids_text):
+def parse_project_competitor_avoids(project_avoids_text, competitor_avoids_text, internal_names_text):
     """ Parse the text for both project and competitor avoids.
         Competitor are simply split on new line
         Project avoids are split on newline and parsed based on specific characters.
@@ -52,8 +52,9 @@ def parse_project_competitor_avoids(project_avoids_text, competitor_avoids_text)
 
     project_avoids = [i.strip() for i in project_avoids_text.split('\n') if i.strip()]
     competitor_avoids = [i.strip() for i in competitor_avoids_text.split('\n') if i.strip()]
+    internal_names = [i.strip() for i in internal_names_text.split('\n') if i.strip()]
 
-    if project_avoids == [] and competitor_avoids == []:
+    if project_avoids == [] and competitor_avoids == [] and internal_names == []:
         raise UserError('No avoids entered')
 
     ### Start dataframe base
@@ -75,10 +76,10 @@ def parse_project_competitor_avoids(project_avoids_text, competitor_avoids_text)
     # Where last character is contained within FIX_SIGNIFIERS (e.g. pre-)
     prefix_mask = [i[-1] in c.FIX_SIGNIFIERS for i in avoids_df[c.VALUE_FIELD]]
 
-    # where first and last characters are contained in ANYWHERE_SIGNIFIERS (e.g. "inf")
+    # where first and last characters are contained in ANYWHERE_SIGNIFIERS (e.g. "inf") # or all([f not in i for f in c.FIX_SIGNIFIERS])
     anywhere_mask = [(i[0] in c.ANYWHERE_SIGNIFIERS and i[-1] in c.ANYWHERE_SIGNIFIERS) for i in avoids_df[c.VALUE_FIELD]]
 
-    ### Set up type values based on pre-defiend masks
+    ### Set up type values based on pre-defined masks
     avoids_df[c.TYPE_FIELD] = np.where(
         infix_mask,
         c.INFIX,
@@ -104,6 +105,20 @@ def parse_project_competitor_avoids(project_avoids_text, competitor_avoids_text)
         c.COMPETITOR
     )
 
+    # ### Set type for project avoids strings without anywhere signifiers as anywhere type
+    avoids_df[c.TYPE_FIELD] = np.where(
+        np.logical_and(avoids_df[c.TYPE_FIELD] == c.STRING_COMPARE, avoids_df[c.CATEGORY_FIELD] == c.PROJECT),
+        c.ANYWHERE,
+        avoids_df[c.TYPE_FIELD]
+    )
+
+    internal_names_df = pd.DataFrame.from_dict({c.VALUE_FIELD: internal_names})
+
+    internal_names_df[c.TYPE_FIELD] = c.NAME_MATCH
+    internal_names_df[c.CATEGORY_FIELD] = c.PROJECT
+
+    avoids_df = pd.concat([avoids_df, internal_names_df])
+
     ### Set default description
     avoids_df[c.DESCRIPTION_FIELD] = 'User Defined Avoid'
 
@@ -114,7 +129,7 @@ def parse_project_competitor_avoids(project_avoids_text, competitor_avoids_text)
     return avoids_df
 
 
-def save_project_competitor_to_file(config, project_avoids_text, competitor_avoids_text):
+def save_project_competitor_to_file(config, project_avoids_text, competitor_avoids_text, internal_names_text):
     """ Save project and competitor avoids to config file for next session. """
 
     config_path = 'NameEvaluator_conf.ini'
@@ -124,6 +139,7 @@ def save_project_competitor_to_file(config, project_avoids_text, competitor_avoi
     ### Replace newline with comma
     CONF.set(c.CONFIG_AVOIDS_HEADER, c.PROJECT, project_avoids_text.replace('\n', ','))
     CONF.set(c.CONFIG_AVOIDS_HEADER, c.COMPETITOR, competitor_avoids_text.replace('\n', ','))
+    CONF.set(c.CONFIG_AVOIDS_HEADER, c.INTERNAL, internal_names_text.replace('\n', ','))
 
     ### Save updated config
     with open(config_path, 'w') as config_file:
@@ -135,7 +151,7 @@ def read_project_competitor_from_file(config):
 
     config_path = 'NameEvaluator_conf.ini'
     if not path.exists(config_path):
-        return '', ''
+        return '', '', ''
 
     ### Read values, replace comma with new line and return the updated text
     conf = configparser.ConfigParser()
@@ -143,8 +159,9 @@ def read_project_competitor_from_file(config):
     try:
         proj_text = conf[c.CONFIG_AVOIDS_HEADER].get(c.PROJECT, '').replace(',', '\n')
         comp_text = conf[c.CONFIG_AVOIDS_HEADER].get(c.COMPETITOR, '').replace(',', '\n')
+        intr_text = conf[c.CONFIG_AVOIDS_HEADER].get(c.INTERNAL, '').replace(',', '\n')
     except KeyError:
         return '', ''
 
-    return proj_text, comp_text
+    return proj_text, comp_text, intr_text
 

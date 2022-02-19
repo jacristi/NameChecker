@@ -90,6 +90,7 @@ TYPE_CHECK_FUNCS = {
     c.INFIX:                check_infix,
     c.SUFFIX:               check_suffix,
     c.ANYWHERE:             check_anywhere,
+    c.NAME_MATCH:           check_string_compare,
 }
 
 def check_name_against_avoids(name, avoids_df, ignore_list, results_df):

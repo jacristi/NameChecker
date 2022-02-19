@@ -997,6 +997,12 @@ font-weight:bold;
             </property>
             <item row="1" column="3">
              <widget class="QTableView" name="qtable_avoids">
+              <property name="minimumSize">
+               <size>
+                <width>400</width>
+                <height>0</height>
+               </size>
+              </property>
               <property name="statusTip">
                <string>Complete list of all avoids</string>
               </property>
@@ -1081,10 +1087,17 @@ font-weight:bold;
               <item>
                <widget class="QLabel" name="label_project_avoids">
                 <property name="text">
-                 <string>Project Avoids to Add</string>
+                 <string>Project Avoids</string>
                 </property>
                 <property name="alignment">
                  <set>Qt::AlignCenter</set>
+                </property>
+               </widget>
+              </item>
+              <item alignment="Qt::AlignHCenter|Qt::AlignVCenter">
+               <widget class="QLabel" name="label_3">
+                <property name="text">
+                 <string>Internal Names</string>
                 </property>
                </widget>
               </item>
@@ -1101,7 +1114,7 @@ font-weight:bold;
               <item>
                <widget class="QLabel" name="label_competitor">
                 <property name="text">
-                 <string>Competitor to Add</string>
+                 <string>Competitors</string>
                 </property>
                 <property name="alignment">
                  <set>Qt::AlignCenter</set>
@@ -1162,6 +1175,23 @@ font-weight:bold;
                 <property name="statusTip">
                  <string>Enter project avoids here</string>
                 </property>
+                <property name="placeholderText">
+                 <string>some instructions here....</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="Line" name="line_5">
+                <property name="orientation">
+                 <enum>Qt::Vertical</enum>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QPlainTextEdit" name="text_internal_names">
+                <property name="placeholderText">
+                 <string>some instructions here....</string>
+                </property>
                </widget>
               </item>
               <item>
@@ -1175,6 +1205,9 @@ font-weight:bold;
                <widget class="QPlainTextEdit" name="text_competitor">
                 <property name="statusTip">
                  <string>Enter competitor names here</string>
+                </property>
+                <property name="placeholderText">
+                 <string>some instructions here....</string>
                 </property>
                </widget>
               </item>

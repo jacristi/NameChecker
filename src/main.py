@@ -76,6 +76,11 @@ class UIMain(QMainWindow):
         self.ui.text_names.setTabChangesFocus(True)
         self.ui.text_project_avoids.setTabChangesFocus(True)
         self.ui.text_competitor.setTabChangesFocus(True)
+        self.ui.text_internal_names.setTabChangesFocus(True)
+
+        self.ui.text_project_avoids.setPlaceholderText(c.PROJECT_AVOID_PLACEHOLDER_TEXT)
+        self.ui.text_internal_names.setPlaceholderText(c.INTERNAL_NAMES_PLACEHOLDER_TEXT)
+        self.ui.text_competitor.setPlaceholderText(c.COMPETITORS_PLACEHOLDER_TEXT)
 
         ### Easily turn off styling
         if no_style is True:
@@ -90,7 +95,7 @@ class UIMain(QMainWindow):
         if upd_df is None:
             self.avoids_df = get_avoids_from_file(self.logger, self.config)
         else:
-            self.avoids_df = pd.concat([self.avoids_df, upd_df])
+            self.avoids_df = pd.concat([get_avoids_from_file(self.logger, self.config), upd_df])
 
         if self.avoids_df is None:
             raise UserError("Master avoids file could not be found/read\nPlease check the path defined in NameEvaluator_conf.ini")
@@ -282,7 +287,8 @@ class UIMain(QMainWindow):
         if choice == QMessageBox.Yes :
             self.ui.text_project_avoids.clear()
             self.ui.text_competitor.clear()
-            save_project_competitor_to_file(self.config, '', '')
+            self.ui.text_internal_names.clear()
+            save_project_competitor_to_file(self.config, '', '', '')
             self.reload_avoids(True)
 
 
@@ -298,16 +304,17 @@ class UIMain(QMainWindow):
 
         project_avoids_text = self.ui.text_project_avoids.toPlainText()
         competitor_avoids_text = self.ui.text_competitor.toPlainText()
+        internal_names_text = self.ui.text_internal_names.toPlainText()
 
         ### No action if nothing exists
-        if project_avoids_text == '' and competitor_avoids_text == '':
+        if project_avoids_text == '' and competitor_avoids_text == '' and internal_names_text == '':
             return
 
         ### Save avoids in config file
-        save_project_competitor_to_file(self.config, project_avoids_text, competitor_avoids_text)
+        save_project_competitor_to_file(self.config, project_avoids_text, competitor_avoids_text, internal_names_text)
 
         ### Parse avoids and concat to complete avoids df
-        addtl_avoids_df = parse_project_competitor_avoids(project_avoids_text, competitor_avoids_text)
+        addtl_avoids_df = parse_project_competitor_avoids(project_avoids_text, competitor_avoids_text, internal_names_text)
         self.set_avoids_table_data(addtl_avoids_df)
 
     @error_handler
@@ -316,25 +323,27 @@ class UIMain(QMainWindow):
 
         project_avoids_text = self.ui.text_project_avoids.toPlainText()
         competitor_avoids_text = self.ui.text_competitor.toPlainText()
+        internal_names_text = self.ui.text_internal_names.toPlainText()
 
         ### Raise UserError if nothing entered by button clicked
-        if project_avoids_text == '' and competitor_avoids_text == '':
+        if project_avoids_text == '' and competitor_avoids_text == '' and internal_names_text == '':
             raise UserError("No avoids to save!")
 
         ### Save avoids in config file
-        save_project_competitor_to_file(self.config, project_avoids_text, competitor_avoids_text)
+        save_project_competitor_to_file(self.config, project_avoids_text, competitor_avoids_text, internal_names_text)
 
         ### Parse avoids and concat to complete avoids df
-        addtl_avoids_df = parse_project_competitor_avoids(project_avoids_text, competitor_avoids_text)
+        addtl_avoids_df = parse_project_competitor_avoids(project_avoids_text, competitor_avoids_text, internal_names_text)
         self.set_avoids_table_data(addtl_avoids_df)
 
     @error_handler
     def set_project_competitor_avoids_from_file(self):
         """ Set text area contents for existing project/competitor avoids. """
 
-        proj_text, comp_text = read_project_competitor_from_file(self.config)
+        proj_text, comp_text, intr_text = read_project_competitor_from_file(self.config)
         self.ui.text_project_avoids.setPlainText(proj_text)
         self.ui.text_competitor.setPlainText(comp_text)
+        self.ui.text_internal_names.setPlainText(intr_text)
 
     def raise_error(self, err):
         """ Raise error in a dialogue box. """

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file '.\src\UI\UINameEvalStyled.ui'
+# Form implementation generated from reading ui file '.\src\UI\UILBBNameEvaluator.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.4
 #
@@ -19,7 +19,7 @@ class Ui_NameEvaluator(object):
         font.setPointSize(9)
         NameEvaluator.setFont(font)
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap(".\\src\\UI\\../../../NameChecker/src/archive/Projects/Old Projects/Name Checkers/genie/lamp.ico"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon.addPixmap(QtGui.QPixmap(":/img_/Leaderboard_Icon_RGB.jpg"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         NameEvaluator.setWindowIcon(icon)
         NameEvaluator.setStyleSheet("QWidget{\n"
 "background-color: rgb(225, 225, 225);\n"

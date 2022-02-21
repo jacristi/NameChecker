@@ -19,8 +19,8 @@
    <string>NameEvaluator</string>
   </property>
   <property name="windowIcon">
-   <iconset>
-    <normaloff>../../../NameChecker/src/archive/Projects/Old Projects/Name Checkers/genie/lamp.ico</normaloff>../../../NameChecker/src/archive/Projects/Old Projects/Name Checkers/genie/lamp.ico</iconset>
+   <iconset resource="Resources.qrc">
+    <normaloff>:/img_/Leaderboard_Icon_RGB.jpg</normaloff>:/img_/Leaderboard_Icon_RGB.jpg</iconset>
   </property>
   <property name="styleSheet">
    <string notr="true">QWidget{

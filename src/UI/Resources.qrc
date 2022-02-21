@@ -1,5 +1,6 @@
 <RCC>
   <qresource prefix="img_">
+    <file>lbb.ico</file>
     <file>Leaderboard_Icon_RGB.jpg</file>
   </qresource>
 </RCC>

@@ -55,7 +55,7 @@ def parse_project_competitor_avoids(project_avoids_text, competitor_avoids_text,
     internal_names = [i.strip() for i in internal_names_text.split('\n') if i.strip()]
 
     if project_avoids == [] and competitor_avoids == [] and internal_names == []:
-        raise UserError('No avoids entered')
+        raise UserError('No new avoids to save')
 
     ### Start dataframe base
     avoids_df = pd.DataFrame.from_dict({

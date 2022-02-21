@@ -6,7 +6,7 @@ from PyQt5 import QtCore, QtWidgets, QtGui
 from PyQt5.QtWidgets import QApplication, QMainWindow, QMessageBox, QErrorMessage
 
 import src.utils.constants as c
-from src.UI.ui_namechecker import Ui_NameEvaluator
+from src.UI.ui_lbb_name_evaluator import Ui_NameEvaluator
 from src.utils.data_models import QTPandasModel, UserError
 from src.utils.check_names import check_names_for_avoids
 from src.utils.common_utils import Logger, error_handler
@@ -31,7 +31,6 @@ class UIMain(QMainWindow):
         ### Set up UI
         self.ui = Ui_NameEvaluator()
         self.ui.setupUi(self)
-        self.setWindowIcon(QtGui.QIcon('app.ico'))
 
         ### Set up config dict + logger
         self.config = c.get_config()
@@ -327,7 +326,7 @@ class UIMain(QMainWindow):
 
         ### Raise UserError if nothing entered by button clicked
         if project_avoids_text == '' and competitor_avoids_text == '' and internal_names_text == '':
-            raise UserError("No avoids to save!")
+            self.clear_avoids(True)
 
         ### Save avoids in config file
         save_project_competitor_to_file(self.config, project_avoids_text, competitor_avoids_text, internal_names_text)
@@ -347,7 +346,7 @@ class UIMain(QMainWindow):
 
     def raise_error(self, err):
         """ Raise error in a dialogue box. """
-
+        self.err_dialogue.setWindowTitle('NameEvaluator Warning')
         self.err_dialogue.showMessage(str(err))
 
     def raise_critical_error(self, err):
@@ -432,9 +431,8 @@ def run():
 
     no_style = False
 
-    NameChecker = UIMain(no_style)
-    NameChecker.show()
-
+    NameEvaluator = UIMain(no_style)
+    NameEvaluator.show()
     sys.exit(app.exec_())
 
 

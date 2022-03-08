@@ -13,14 +13,13 @@ from src.utils.data_models import UserError
 def get_avoids_from_file(logger, config):
     """ Pulls data from master excel sheet (path defined in the config), formats the df and sends back to be displayed in qtable view"""
 
-    file_path = config.get('PATH_TO_AVOIDS_FILE', 'asdasf.xlsx')
+    file_path = config.get('PATH_TO_AVOIDS_FILE', 'avoids_master.xlsx')
 
     consol_df = None
-
     ### For each sheet, get the sheet's data and concat to consolidated dataframe
     for s_name in (c.INN, c.LINGUISTIC, c.MARKET_RESEARCH):
         try:
-            df = pd.read_excel(file_path, sheet_name=s_name)
+            df = pd.read_excel(file_path, sheet_name=s_name, dtype=str)
         except FileNotFoundError as e:
             return None
 
@@ -39,6 +38,13 @@ def get_avoids_from_file(logger, config):
 
     ### Keep only exepected columns
     consol_df = consol_df[[c.VALUE_FIELD, c.TYPE_FIELD, c.DESCRIPTION_FIELD, c.CATEGORY_FIELD]]
+
+    def clean_text(val):
+        ret = ''.join([ch for ch in val if ch.isalpha()])
+        return ret
+
+    ### Clean/remove non-alpha characters
+    consol_df[c.VALUE_FIELD] = consol_df[c.VALUE_FIELD].apply(clean_text)
 
     return consol_df
 
